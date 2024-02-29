@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interceptors\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -26,6 +21,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Trashcan.Domain\Trashcan.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interceptors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Interceptors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Interceptors\**" />
   </ItemGroup>
 
 </Project>
