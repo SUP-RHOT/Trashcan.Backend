@@ -5,7 +5,7 @@ namespace Trashcan.Domain.Entity
 	/// <summary>
 	/// База данных адресов, где будут заложены все адреса и определены координаты, где работает наш проект.
 	/// </summary>
-	public class Address_base : IBaseEntity<int>
+	public class AddressBase : IBaseEntity<int>
 	{
 		/// <summary>
 		/// Уникальный идентификатор.
