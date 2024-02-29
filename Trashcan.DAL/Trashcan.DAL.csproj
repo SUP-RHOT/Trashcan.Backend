@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DependensyInjection\" />
     <Folder Include="Interceptors\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
