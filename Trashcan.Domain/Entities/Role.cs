@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Trashcan.Domain.Entities.BaseEntity;
 
 namespace Trashcan.Domain.Entity
 {
-	internal class Role
+	/// <summary>
+	/// Роль действующего субъекта.
+	/// </summary>
+	public class Role : IBaseEntity<int>
 	{
+		/// <summary>
+		/// Уникальный идентификатор.
+		/// </summary>
+		public int Id { get; set; }
+
+		/// <summary>
+		/// Название роли субъекта.
+		/// </summary>
+		public char Name { get; set; }
 	}
 }
