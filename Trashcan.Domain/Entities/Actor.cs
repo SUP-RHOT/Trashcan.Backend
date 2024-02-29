@@ -77,5 +77,15 @@ namespace Trashcan.Domain.Entity
 		/// Согласие на получение рассылки новостей о проекте.
 		/// </summary>
 		public bool Mailing { get; set; }
+
+		/// <summary>
+		/// Сушность Role.
+		/// </summary>
+		public Role Role { get; set; }
+
+		/// <summary>
+		/// Cсылка на поле Id в сущности Role.
+		/// </summary>
+		public int RoleId { get; set; }
 	}
 }

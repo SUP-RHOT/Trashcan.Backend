@@ -26,5 +26,15 @@ namespace Trashcan.Domain.Entity
 		/// Ссылка хранения изображения темы.
 		/// </summary>
 		public char Image { get; set; }
+
+		/// <summary>
+		/// Сущность Institution.
+		/// </summary>
+		public Institution Institution { get; set; }
+
+		/// <summary>
+		/// Ссылка на поле Id в сущности Institution.
+		/// </summary>
+		public int InstitutionId { get; set; }
 	}
 }
