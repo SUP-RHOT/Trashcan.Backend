@@ -16,4 +16,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Trashcan.DAL\Trashcan.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
