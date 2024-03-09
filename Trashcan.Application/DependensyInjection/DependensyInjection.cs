@@ -15,10 +15,15 @@ public static class DependensyInjection
     private static void AddMappers(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(ActorMapping));
+        services.AddAutoMapper(typeof(AddressMapping));
+        services.AddAutoMapper(typeof(AddressBaseMapping));
     }
 
     private static void InitServices(this IServiceCollection services)
     {
         services.AddScoped<IActorService, ActorService>();
+        services.AddScoped<IAddressService, AddressService>();
+        services.AddScoped<IAddressBaseService, AddressBaseService>();
+        
     }
 }
