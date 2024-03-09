@@ -1,3 +1,4 @@
+using Serilog;
 using Trashcan.Application.DependensyInjection;
 using Trashcan.DAL.DependensyInjection;
 
@@ -8,9 +9,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddApplication();
 
 builder.Services.AddDataAccessLayer(builder.Configuration);
+builder.Services.AddApplication();
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 var app = builder.Build();
 
