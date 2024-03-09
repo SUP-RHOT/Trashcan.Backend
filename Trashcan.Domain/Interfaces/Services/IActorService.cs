@@ -3,10 +3,13 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Domain.Interfaces.Services;
 
+/// <summary>
+/// Обработка актеров.
+/// </summary>
 public interface IActorService
 {
     /// <summary>
-    /// Получение всех атеров.
+    /// Получение всех актеров.
     /// </summary>
     /// <returns> Массив актеров. </returns>
     Task<CollectionResult<ActorDto>> GetActorAsync();
@@ -36,6 +39,6 @@ public interface IActorService
     /// Обновление данных конкретного актера.
     /// </summary>
     /// <param name="dto"> Объект с обновленными данными. </param>
-    /// <returns> Актер с обновленыыми данными. </returns>
+    /// <returns> Актер с обновленными данными. </returns>
     Task<BaseResult<ActorDto>> UpdateActorAsync(ActorDto dto);
 }

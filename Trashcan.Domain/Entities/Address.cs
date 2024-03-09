@@ -3,7 +3,7 @@
 namespace Trashcan.Domain.Entity
 {
 	/// <summary>
-	/// Адрес проишествия.
+	/// Адрес происшествия.
 	/// </summary>
 	public class Address : IBaseEntity<int>
 	{
@@ -23,17 +23,17 @@ namespace Trashcan.Domain.Entity
 		public float Width { get; set; }
 
 		/// <summary>
-		/// Город, в котором произошло проишествие.
+		/// Город, в котором произошло происшествие.
 		/// </summary>
 		public string City { get; set; }
 
 		/// <summary>
-		/// Название улицы, на которой произошло проишествие.
+		/// Название улицы, на которой произошло происшествие.
 		/// </summary>
 		public string Street { get; set; }
 
 		/// <summary>
-		/// Номер дома на улице, в котором произошло проишествие.
+		/// Номер дома на улице, в котором произошло происшествие.
 		/// </summary>
 		public string House { get; set; }
 	}
