@@ -15,17 +15,17 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Название пункта каталога происшествий.
 		/// </summary>
-		public char Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Краткое описание пункта каталога происшествий.
 		/// </summary>
-		public char Description { get; set; }
+		public string Description { get; set; }
 
 		/// <summary>
 		/// Ссылка хранения изображения темы.
 		/// </summary>
-		public char Image { get; set; }
+		public string Image { get; set; }
 
 		/// <summary>
 		/// Сущность Institution.

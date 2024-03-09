@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Trashcan.Application\Trashcan.Application.csproj" />
     <ProjectReference Include="..\Trashcan.DAL\Trashcan.DAL.csproj" />
   </ItemGroup>
 

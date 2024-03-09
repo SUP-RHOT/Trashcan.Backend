@@ -25,16 +25,16 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Название города, в котором работает проект.
 		/// </summary>
-		public char City { get; set; }
+		public string City { get; set; }
 
 		/// <summary>
 		/// Название улицы, которая входит в зону работы проекта.
 		/// </summary>
-		public char Street { get; set; }
+		public string Street { get; set; }
 
 		/// <summary>
 		/// Номер дома на улице, входящей в зону работы проекта.
 		/// </summary>
-		public char House { get; set; }
+		public string House { get; set; }
 	}
 }

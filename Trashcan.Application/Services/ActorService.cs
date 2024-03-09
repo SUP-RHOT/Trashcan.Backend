@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Trashcan.Application.Resources;
@@ -14,44 +15,34 @@ public class ActorService : IActorService
 {
     private readonly BaseRepository<Actor> _repository;
     private readonly ILogger _logger;
+    private readonly IMapper _mapper;
 
-    public ActorService(BaseRepository<Actor> repository, ILogger logger)
+    public ActorService(BaseRepository<Actor> repository, ILogger logger, IMapper mapper)
     {
         _repository = repository;
         _logger = logger;
+        _mapper = mapper;
     }
-    
-    public async Task<CollectionResult<ActorDTO>> GetActor()
+
+    public async Task<CollectionResult<ActorDto>> GetActorAsync()
     {
         try
         {
             var actors = await _repository.GetAll()
-                .Select(x => new ActorDTO
-                (
-                    x.Id,
-                    x.Lastname,
-                    x.Firstname,
-                    x.Secondname,
-                    x.PhoneNumber,
-                    x.Email,
-                    x.City,
-                    x.Street,
-                    x.House,
-                    x.Apartament
-                ))
+                .Select(x => _mapper.Map<ActorDto>(x))
                 .ToArrayAsync();
 
             if (!actors.Any())
             {
                 _logger.Warning(ErrorMessage.DataNotFount, actors.Length);
-                return new CollectionResult<ActorDTO>()
+                return new CollectionResult<ActorDto>()
                 {
                     ErrorMassage = ErrorMessage.DataNotFount,
                     ErrorCode = (int)ErrorCode.DataNotFount
                 };
             }
 
-            return new CollectionResult<ActorDTO>()
+            return new CollectionResult<ActorDto>()
             {
                 Data = actors,
                 Count = actors.Length
@@ -60,45 +51,33 @@ public class ActorService : IActorService
         catch (Exception e)
         {
             _logger.Error(e, e.Message);
-            return new CollectionResult<ActorDTO>()
+            return new CollectionResult<ActorDto>()
             {
                 ErrorMassage = ErrorMessage.InternalServerError,
-                ErrorCode = (int) ErrorCode.InternalServerError
+                ErrorCode = (int)ErrorCode.InternalServerError
             };
         }
     }
 
-    public async Task<BaseResult<ActorDTO>> GetActorByIdAsync(int id)
+    public async Task<BaseResult<ActorDto>> GetActorByIdAsync(int id)
     {
         try
         {
             var actor = await _repository.GetAll()
-                .Select(x => new ActorDTO
-                (
-                    x.Id,
-                    x.Lastname,
-                    x.Firstname,
-                    x.Secondname,
-                    x.PhoneNumber,
-                    x.Email,
-                    x.City,
-                    x.Street,
-                    x.House,
-                    x.Apartament
-                ))
-                .FirstOrDefaultAsync(x => x.id == id);
-            
+                .Select(x => _mapper.Map<ActorDto>(x))
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             if (actor == null)
             {
                 _logger.Warning(ErrorMessage.DataNotFount, id);
-                return new BaseResult<ActorDTO>()
+                return new BaseResult<ActorDto>()
                 {
                     ErrorMassage = ErrorMessage.DataNotFount,
                     ErrorCode = (int)ErrorCode.DataNotFount
                 };
             }
 
-            return new BaseResult<ActorDTO>()
+            return new BaseResult<ActorDto>()
             {
                 Data = actor
             };
@@ -106,15 +85,117 @@ public class ActorService : IActorService
         catch (Exception e)
         {
             _logger.Error(e, e.Message);
-            return new BaseResult<ActorDTO>()
+            return new BaseResult<ActorDto>()
             {
                 ErrorMassage = ErrorMessage.InternalServerError,
-                ErrorCode = (int) ErrorCode.InternalServerError
+                ErrorCode = (int)ErrorCode.InternalServerError
             };
         }
 
-        
+
     }
-    
-    
+
+    public async Task<BaseResult<ActorDto>> CreateActorAsync(ActorDto? dto)
+    {
+        try
+        {
+            if (dto == null)
+            {
+                return new BaseResult<ActorDto>()
+                {
+                    ErrorMassage = ErrorMessage.DataNotFount,
+                    ErrorCode = (int)ErrorCode.DataNotFount
+                };
+            }
+
+            await _repository.CreateAsync(_mapper.Map<Actor>(dto));
+
+            return new BaseResult<ActorDto>()
+            {
+                Data = dto
+            };
+
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return new BaseResult<ActorDto>()
+            {
+                ErrorMassage = ErrorMessage.InternalServerError,
+                ErrorCode = (int)ErrorCode.InternalServerError
+            };
+        }
+    }
+
+    public async Task<BaseResult<ActorDto>> DeleteActorAsync(int id)
+    {
+        try
+        {
+            var actor = await _repository.GetAll()
+                .FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (actor == null)
+            {
+                _logger.Warning(ErrorMessage.DataNotFount, id);
+                return new BaseResult<ActorDto>()
+                {
+                    ErrorMassage = ErrorMessage.DataNotFount,
+                    ErrorCode = (int)ErrorCode.DataNotFount
+                };
+            }
+
+            await _repository.RemoveAsync(actor);
+
+            return new BaseResult<ActorDto>()
+            {
+                Data = _mapper.Map<ActorDto>(actor)
+            };
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return new BaseResult<ActorDto>()
+            {
+                ErrorMassage = ErrorMessage.InternalServerError,
+                ErrorCode = (int)ErrorCode.InternalServerError
+            };
+        }
+    }
+
+    public async Task<BaseResult<ActorDto>> UpdateActorAsync(ActorDto dto)
+    {
+        try
+        {
+            var actor = await _repository.GetAll()
+                .FirstOrDefaultAsync(x => x.Id == dto.Id);
+
+            if (actor == null)
+            {
+                _logger.Warning(ErrorMessage.DataNotFount, dto.Id);
+                return new BaseResult<ActorDto>()
+                {
+                    ErrorMassage = ErrorMessage.DataNotFount,
+                    ErrorCode = (int)ErrorCode.DataNotFount
+                };
+            }
+            
+            await _repository.UpdateAsync(_mapper.Map<Actor>(dto));
+
+            return new BaseResult<ActorDto>()
+            {
+                Data = dto
+            };
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return new BaseResult<ActorDto>()
+            {
+                ErrorMassage = ErrorMessage.InternalServerError,
+                ErrorCode = (int)ErrorCode.InternalServerError
+            };
+        }
+    }
 }
+
+

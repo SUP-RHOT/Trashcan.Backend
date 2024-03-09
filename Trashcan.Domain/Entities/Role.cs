@@ -15,6 +15,6 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Название роли субъекта.
 		/// </summary>
-		public char Name { get; set; }
+		public string Name { get; set; }
 	}
 }

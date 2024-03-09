@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using ApplicationDbContext = Trashcan.DAL.ApplicationDbContext;
 
 namespace Trashcan.DAL
 {

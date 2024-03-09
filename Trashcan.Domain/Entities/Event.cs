@@ -20,12 +20,12 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Тема сообщения.
 		/// </summary>
-		public char TypeMessage { get; set; }
+		public string TypeMessage { get; set; }
 
 		/// <summary>
 		/// Текст субъекта, описывающий проблему.
 		/// </summary>
-		public char TextMessage { get; set; }
+		public string TextMessage { get; set; }
 
 		/// <summary>
 		/// Ссылка хранения фотографии событии.

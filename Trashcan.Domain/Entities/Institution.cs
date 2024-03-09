@@ -15,21 +15,21 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Название инстанции, для которой создается сообщение.
 		/// </summary>
-		public char Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Город, в котором действует инстанция.
 		/// </summary>
-		public char City { get; set; }
+		public string City { get; set; }
 
 		/// <summary>
 		/// Район города, в котором действует инстанция.
 		/// </summary>
-		public char District { get; set; }
+		public string District { get; set; }
 
 		/// <summary>
 		/// Описание конкретной инстанции.
 		/// </summary>
-		public char Description { get; set; }
+		public string Description { get; set; }
 	}
 }

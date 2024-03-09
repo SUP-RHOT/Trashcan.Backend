@@ -25,16 +25,16 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Город, в котором произошло проишествие.
 		/// </summary>
-		public char City { get; set; }
+		public string City { get; set; }
 
 		/// <summary>
 		/// Название улицы, на которой произошло проишествие.
 		/// </summary>
-		public char Street { get; set; }
+		public string Street { get; set; }
 
 		/// <summary>
 		/// Номер дома на улице, в котором произошло проишествие.
 		/// </summary>
-		public char House { get; set; }
+		public string House { get; set; }
 	}
 }

@@ -15,11 +15,11 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Название шаблона сообщения, создаваемого для конкретной инстанции.
 		/// </summary>
-		public char Name { get; set; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Текст шаблона сообщения, создаваемого для конкретной инстанции.
 		/// </summary>
-		public char Text { get; set; }
+		public string Text { get; set; }
 	}
 }

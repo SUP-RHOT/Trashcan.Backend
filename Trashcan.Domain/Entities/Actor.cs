@@ -16,57 +16,57 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Фамилия субъекта.
 		/// </summary>
-		public char Lastname { get; set; }
+		public string Lastname { get; set; }
 
 		/// <summary>
 		/// Имя субъекта.
 		/// </summary>
-		public char Firstname { get; set; }
+		public string Firstname { get; set; }
 
 		/// <summary>
 		/// Отчество субъекта.
 		/// </summary>
-		public char Secondname { get; set; }
+		public string? Secondname { get; set; }
 
 		/// <summary>
 		/// Телефон субъекта.
 		/// </summary>
-		public char PhoneNumber { get; set; }
+		public string PhoneNumber { get; set; }
 
 		/// <summary>
 		/// E-mail субъекта.
 		/// </summary>
-		public char Email { get; set; }
+		public string Email { get; set; }
 
 		/// <summary>
 		/// Город, в котором проживает субъект.
 		/// </summary>
-		public char City { get; set; }
+		public string City { get; set; }
 
 		/// <summary>
 		/// Улица, на которой проживает субъект.
 		/// </summary>
-		public char Street { get; set; }
+		public string Street { get; set; }
 
 		/// <summary>
 		/// Дом, в котором проживает субъект.
 		/// </summary>
-		public char House { get; set; }
+		public string House { get; set; }
 
 		/// <summary>
 		/// Квартира, в которой проживает субъект.
 		/// </summary>
-		public char Apartament { get; set; }
+		public string Apartament { get; set; }
 
 		/// <summary>
 		/// Логин субъекта.
 		/// </summary>
-		public char Login { get; set; }
+		public string Login { get; set; }
 
 		/// <summary>
 		/// Пароль субъекта.
 		/// </summary>
-		public char Password { get; set; }
+		public string Password { get; set; }
 
 		/// <summary>
 		/// Статус субъекта.
