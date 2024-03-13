@@ -21,6 +21,7 @@ public static class DependensyInjection
         services.AddAutoMapper(typeof(InstitutionMapping));
         services.AddAutoMapper(typeof(RoleMapping));
         services.AddAutoMapper(typeof(RubricMapping));
+        services.AddAutoMapper(typeof(TemplateMapping));
 
     }
 
@@ -33,5 +34,6 @@ public static class DependensyInjection
         services.AddScoped<IInstitutionService, InstitutionService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IRubricService, RubricService>();
+        services.AddScoped<ITemplateService, TemplateService>();
     }
 }
