@@ -18,6 +18,8 @@ public static class DependensyInjection
         services.AddAutoMapper(typeof(AddressMapping));
         services.AddAutoMapper(typeof(AddressBaseMapping));
         services.AddAutoMapper(typeof(EventMapping));
+        services.AddAutoMapper(typeof(InstitutionMapping));
+        
     }
 
     private static void InitServices(this IServiceCollection services)
@@ -26,6 +28,7 @@ public static class DependensyInjection
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IAddressBaseService, AddressBaseService>();
         services.AddScoped<IEventService, EventService>();
+        services.AddScoped<IInstitutionService, IInstitutionService>();
         
     }
 }
