@@ -20,6 +20,7 @@ public static class DependensyInjection
         services.AddAutoMapper(typeof(EventMapping));
         services.AddAutoMapper(typeof(InstitutionMapping));
         services.AddAutoMapper(typeof(RoleMapping));
+        services.AddAutoMapper(typeof(RubricMapping));
 
     }
 
@@ -31,5 +32,6 @@ public static class DependensyInjection
         services.AddScoped<IEventService, EventService>();
         services.AddScoped<IInstitutionService, InstitutionService>();
         services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IRubricService, RubricService>();
     }
 }
