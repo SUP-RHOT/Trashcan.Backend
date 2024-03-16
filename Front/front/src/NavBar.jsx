@@ -3,13 +3,13 @@ import './styles/Navbar.css';
 
 const Navbar = () => {
     return (
-        <nav className="navbar">
-            <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-            </ul>
-        </nav>
+        <div className="navbar">
+            <button>Домой</button>
+            <button>О нас</button>
+            <button>Контакты</button>
+            <button>Зарегестрироваться</button>
+            <button>Войти</button>
+        </div>
     );
 }
 
