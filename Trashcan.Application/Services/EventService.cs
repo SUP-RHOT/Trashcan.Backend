@@ -200,5 +200,42 @@ namespace Trashcan.Application.Services
                 };
             }
         }
+
+        /// <inheritdoc />
+        public async Task<CollectionResult<EventDto>> GetActorEventsAsync(int actorId)
+        {
+            try
+            {
+                var events = await _repository.GetAll()
+                    .Select(x => _mapper.Map<EventDto>(x))
+                    .Where(x => x.ActorId == actorId)
+                    .ToArrayAsync();
+
+                if (!events.Any())
+                {
+                    _logger.Warning(ErrorMessage.DataNotFount, events.Length);
+                    return new CollectionResult<EventDto>()
+                    {
+                        ErrorMassage = ErrorMessage.DataNotFount,
+                        ErrorCode = (int)ErrorCode.DataNotFount
+                    };
+                }
+
+                return new CollectionResult<EventDto>()
+                {
+                    Data = events,
+                    Count = events.Length
+                };
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new CollectionResult<EventDto>()
+                {
+                    ErrorMassage = ErrorMessage.InternalServerError,
+                    ErrorCode = (int)ErrorCode.InternalServerError
+                };
+            }
+        }
     }
 }

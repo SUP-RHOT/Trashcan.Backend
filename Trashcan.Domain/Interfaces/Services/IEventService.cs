@@ -41,4 +41,11 @@ public interface IEventService
     /// <param name="dto"> Объект с обновленными данными. </param>
     /// <returns> Происшествие с обновленными данными. </returns>
     Task<BaseResult<EventDto>> UpdateEventAsync(EventDto dto);
+
+    /// <summary>
+    /// Получение всех происшествий актера.
+    /// </summary>
+    /// <param name="actorId"> Id актера. </param>
+    /// <returns> Массив происшествий. </returns>
+    Task<CollectionResult<EventDto>> GetActorEventsAsync(int actorId);
 }
