@@ -24,4 +24,13 @@
     <data name="DataNotFount" xml:space="preserve">
         <value>Данные не найдены</value>
     </data>
+    <data name="ActorAlreadyExists" xml:space="preserve">
+        <value>Пользователь уже существует</value>
+    </data>
+    <data name="InvalidPassword" xml:space="preserve">
+        <value>Неверный пароль</value>
+    </data>
+    <data name="InvalidToken" xml:space="preserve">
+        <value>Невалидный токен</value>
+    </data>
 </root>

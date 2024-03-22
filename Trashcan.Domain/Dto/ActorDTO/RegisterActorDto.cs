@@ -1,8 +1,7 @@
-#nullable enable
 namespace Trashcan.Domain.Dto.ActorDTO;
 
-public record ActorDto(
-    int? Id,
+public record RegisterActorDto
+( 
     string LastName,
     string FirstName,
     string? SecondName,

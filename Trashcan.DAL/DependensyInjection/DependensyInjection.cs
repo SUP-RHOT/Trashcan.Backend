@@ -24,6 +24,7 @@ public static class DependensyInjection
     public static void InitRepositories(this IServiceCollection services)
     {
         services.AddScoped<IBaseRepository<Actor>, BaseRepository<Actor>>();
+        services.AddScoped<IBaseRepository<ActorToken>, BaseRepository<ActorToken>>();
         services.AddScoped<IBaseRepository<Address>, BaseRepository<Address>>();
         services.AddScoped<IBaseRepository<AddressBase>, BaseRepository<AddressBase>>();
         services.AddScoped<IBaseRepository<Event>, BaseRepository<Event>>();

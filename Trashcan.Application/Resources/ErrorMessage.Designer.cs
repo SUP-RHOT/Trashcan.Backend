@@ -60,6 +60,15 @@ namespace Trashcan.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь уже существует.
+        /// </summary>
+        internal static string ActorAlreadyExists {
+            get {
+                return ResourceManager.GetString("ActorAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Данные не найдены.
         /// </summary>
         internal static string DataNotFount {
@@ -74,6 +83,24 @@ namespace Trashcan.Application.Resources {
         internal static string InternalServerError {
             get {
                 return ResourceManager.GetString("InternalServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неверный пароль.
+        /// </summary>
+        internal static string InvalidPassword {
+            get {
+                return ResourceManager.GetString("InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невалидный токен.
+        /// </summary>
+        internal static string InvalidToken {
+            get {
+                return ResourceManager.GetString("InvalidToken", resourceCulture);
             }
         }
     }

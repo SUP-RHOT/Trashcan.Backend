@@ -17,4 +17,13 @@
     <data name="DataNotFount" xml:space="preserve">
         <value>Data not fount</value>
     </data>
+    <data name="ActorAlreadyExists" xml:space="preserve">
+        <value>Actor already exists</value>
+    </data>
+    <data name="InvalidPassword" xml:space="preserve">
+        <value>Invalid password</value>
+    </data>
+    <data name="InvalidToken" xml:space="preserve">
+        <value>Invalid token</value>
+    </data>
 </root>
