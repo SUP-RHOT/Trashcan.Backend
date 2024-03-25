@@ -20,6 +20,7 @@ public class ActorConfiguration :  IEntityTypeConfiguration<Actor>
         builder.Property(a => a.Lastname).HasMaxLength(100).IsRequired();
         builder.Property(a => a.Firstname).HasMaxLength(100).IsRequired();
         builder.Property(a => a.Secondname).HasMaxLength(100);
+        builder.Property(a => a.Email).HasMaxLength(100).IsRequired();
         builder.Property(a => a.PhoneNumber).HasMaxLength(12).IsRequired();
         builder.Property(a => a.City).HasMaxLength(100).IsRequired();
         builder.Property(a => a.Street).HasMaxLength(100).IsRequired();

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Trashcan.Application.Mapping;
+using Trashcan.Application.Mapping.ActorMapping;
 using Trashcan.Application.Services;
 using Trashcan.Domain.Interfaces.Services;
 

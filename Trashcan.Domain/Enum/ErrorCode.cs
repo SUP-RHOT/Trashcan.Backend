@@ -4,5 +4,9 @@ public enum ErrorCode
 {
     InternalServerError = 1,
     DataNotFount = 2,
-    AddressNotSupported = 20
+    
+    ActorAlreadyExists = 11,
+    InvalidPassword = 12
+    
+    
 }

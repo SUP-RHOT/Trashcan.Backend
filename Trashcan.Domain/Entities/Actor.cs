@@ -87,5 +87,9 @@ namespace Trashcan.Domain.Entity
 		/// Cсылка на поле Id в сущности Role.
 		/// </summary>
 		public int RoleId { get; set; }
+		
+		public ActorToken ActorToken { get; set; }
+
+		public int ActorTokenId { get; set; }
 	}
 }
