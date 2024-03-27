@@ -6,6 +6,7 @@ using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.TemplateDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
+using Trashcan.Domain.Interfaces.BaseRepository;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -15,11 +16,11 @@ namespace Trashcan.Application.Services
     /// <inheritdoc />
     public class TemplateService : ITemplateService
     {
-        private readonly BaseRepository<Template> _repository;
+        private readonly IBaseRepository<Template> _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public TemplateService(BaseRepository<Template> repository, ILogger logger, IMapper mapper)
+        public TemplateService(IBaseRepository<Template> repository, ILogger logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;

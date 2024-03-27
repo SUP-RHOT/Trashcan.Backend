@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Serilog;
 using Trashcan.Application.DependensyInjection;
 using Trashcan.DAL.DependensyInjection;
@@ -12,10 +11,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSections));
+
 builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddApplication();
+
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSections));
 
 var app = builder.Build();
 

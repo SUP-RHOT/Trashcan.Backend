@@ -30,5 +30,8 @@ public class ActorConfiguration :  IEntityTypeConfiguration<Actor>
         builder.Property(a => a.Password).HasMaxLength(20).IsRequired();
         builder.Property(a => a.Status).IsRequired();
         builder.Property(a => a.Mailing).IsRequired();
+        builder.HasOne(a => a.ActorToken)
+            .WithOne(at => at.Actor)
+            .HasForeignKey<ActorToken>(at => at.ActorId);
     }
 }

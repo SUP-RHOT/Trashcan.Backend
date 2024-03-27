@@ -6,6 +6,7 @@ using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.RubricDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
+using Trashcan.Domain.Interfaces.BaseRepository;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -15,11 +16,11 @@ namespace Trashcan.Application.Services
     /// <inheritdoc />
     public class RubricService : IRubricService
     {
-        private readonly BaseRepository<Rubric> _repository;
+        private readonly IBaseRepository<Rubric> _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RubricService(BaseRepository<Rubric> repository, ILogger logger, IMapper mapper)
+        public RubricService(IBaseRepository<Rubric> repository, ILogger logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;

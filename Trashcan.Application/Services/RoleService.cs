@@ -6,6 +6,7 @@ using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.RoleDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
+using Trashcan.Domain.Interfaces.BaseRepository;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -15,11 +16,11 @@ namespace Trashcan.Application.Services
     /// <inheritdoc />
     public class RoleService : IRoleService
     {
-        private readonly BaseRepository<Role> _repository;
+        private readonly IBaseRepository<Role> _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
-        public RoleService(BaseRepository<Role> repository, ILogger logger, IMapper mapper)
+        public RoleService(IBaseRepository<Role> repository, ILogger logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;

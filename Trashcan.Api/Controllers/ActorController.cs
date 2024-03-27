@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Trashcan.Application.Services;
 using Trashcan.Domain.Dto.ActorDTO;
+using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
 namespace Trashcan.Api.Controllers;
@@ -9,9 +10,9 @@ namespace Trashcan.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class ActorController : ControllerBase
 {
-    private readonly ActorService _actorService;
+    private readonly IActorService _actorService;
 
-    public ActorController(ActorService actorService)
+    public ActorController(IActorService actorService)
     {
         _actorService = actorService;
     }

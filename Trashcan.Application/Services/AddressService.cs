@@ -6,6 +6,7 @@ using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
+using Trashcan.Domain.Interfaces.BaseRepository;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -14,12 +15,12 @@ namespace Trashcan.Application.Services;
 /// <inheritdoc />
 public class AddressService : IAddressService
 {
-    private readonly BaseRepository<Address> _repository;
-    private readonly BaseRepository<AddressBase> _addressBaseRepository;
+    private readonly IBaseRepository<Address> _repository;
+    private readonly IBaseRepository<AddressBase> _addressBaseRepository;
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
 
-    public AddressService(BaseRepository<Address> repository, BaseRepository<AddressBase> addressBaseRepository, ILogger logger, IMapper mapper)
+    public AddressService(IBaseRepository<Address> repository, IBaseRepository<AddressBase> addressBaseRepository, ILogger logger, IMapper mapper)
     {
         _repository = repository;
         _addressBaseRepository = addressBaseRepository;

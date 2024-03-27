@@ -6,6 +6,7 @@ using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.ActorDTO;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
+using Trashcan.Domain.Interfaces.BaseRepository;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -13,11 +14,11 @@ namespace Trashcan.Application.Services;
 
 public class ActorService : IActorService
 {
-    private readonly BaseRepository<Actor> _repository;
+    private readonly IBaseRepository<Actor> _repository;
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
 
-    public ActorService(BaseRepository<Actor> repository, ILogger logger, IMapper mapper)
+    public ActorService(IBaseRepository<Actor> repository, ILogger logger, IMapper mapper)
     {
         _repository = repository;
         _logger = logger;

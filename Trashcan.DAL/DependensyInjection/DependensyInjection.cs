@@ -11,14 +11,14 @@ public static class DependensyInjection
 {
     public static void AddDataAccessLayer(this IServiceCollection? services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("MSSQL");
+        var connectionString = configuration.GetConnectionString("DefaultConnection"/*"MSSQL"*/);
 
-        services.AddDbContext<ApplicationDbContext>(options =>
+        /*services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer(connectionString);
-        });
-		//services.AddDbContext<ApplicationDbContext>(options =>
-		//options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        });*/
+		services.AddDbContext<ApplicationDbContext>(options =>
+		options.UseSqlServer(connectionString));
 
 		services.InitRepositories();
     }
