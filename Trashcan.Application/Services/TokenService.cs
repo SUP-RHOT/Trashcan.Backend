@@ -9,6 +9,7 @@ using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Trashcan.Application.Resources;
+using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.AuthToken;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
