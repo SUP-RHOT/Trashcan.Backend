@@ -69,6 +69,15 @@ namespace Trashcan.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Адрес не поддерживается.
+        /// </summary>
+        internal static string AddressNotSupported {
+            get {
+                return ResourceManager.GetString("AddressNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Данные не найдены.
         /// </summary>
         internal static string DataNotFount {

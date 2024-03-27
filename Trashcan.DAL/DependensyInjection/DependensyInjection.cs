@@ -17,14 +17,15 @@ public static class DependensyInjection
         {
             options.UseSqlServer(connectionString);
         });
+		//services.AddDbContext<ApplicationDbContext>(options =>
+		//options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        services.InitRepositories();
+		services.InitRepositories();
     }
 
     public static void InitRepositories(this IServiceCollection services)
     {
         services.AddScoped<IBaseRepository<Actor>, BaseRepository<Actor>>();
-        services.AddScoped<IBaseRepository<ActorToken>, BaseRepository<ActorToken>>();
         services.AddScoped<IBaseRepository<Address>, BaseRepository<Address>>();
         services.AddScoped<IBaseRepository<AddressBase>, BaseRepository<AddressBase>>();
         services.AddScoped<IBaseRepository<Event>, BaseRepository<Event>>();
@@ -32,5 +33,6 @@ public static class DependensyInjection
         services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();
         services.AddScoped<IBaseRepository<Rubric>, BaseRepository<Rubric>>();
         services.AddScoped<IBaseRepository<Template>, BaseRepository<Template>>();
+        services.AddScoped<IBaseRepository<ActorToken>, BaseRepository<ActorToken>>();
     }
 }

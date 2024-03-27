@@ -36,4 +36,7 @@
     <data name="InvalidClientRequest" xml:space="preserve">
         <value>Невалидный запрос клиента</value>
     </data>
+    <data name="AddressNotSupported" xml:space="preserve">
+        <value>Адрес не поддерживается</value>
+    </data>
 </root>

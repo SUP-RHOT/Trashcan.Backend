@@ -29,4 +29,7 @@
     <data name="InvalidClientRequest" xml:space="preserve">
         <value>Invalid client request</value>
     </data>
+    <data name="AddressNotSupported" xml:space="preserve">
+        <value>Address not supported</value>
+    </data>
 </root>

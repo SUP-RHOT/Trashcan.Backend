@@ -6,7 +6,7 @@ public enum ErrorCode
     DataNotFount = 2,
     
     ActorAlreadyExists = 11,
-    InvalidPassword = 12
+    InvalidPassword = 12,
     
-    
+    AddressNotSupported = 21
 }

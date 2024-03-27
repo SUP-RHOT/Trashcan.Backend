@@ -11,6 +11,7 @@ public static class DependensyInjection
     public static void AddApplication(this IServiceCollection services)
     {
         services.AddMappers();
+        services.InitServices();
     }
 
     private static void AddMappers(this IServiceCollection services)
@@ -23,6 +24,7 @@ public static class DependensyInjection
         services.AddAutoMapper(typeof(RoleMapping));
         services.AddAutoMapper(typeof(RubricMapping));
         services.AddAutoMapper(typeof(TemplateMapping));
+        services.AddAutoMapper(typeof(RegisterActorMapping));
 
     }
 
@@ -36,5 +38,8 @@ public static class DependensyInjection
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<IRubricService, RubricService>();
         services.AddScoped<ITemplateService, TemplateService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITokenService, TokenService>();
     }
 }
