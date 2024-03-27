@@ -44,7 +44,8 @@ public class AuthService : IAuthService
     {
         try
         {
-            var actor = await _actorRepository.GetAll().FirstOrDefaultAsync(x => x.Login == dto.Login);
+            var actor = await _actorRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.Login == dto.Login);
             if (actor != null)
             {
                 _logger.Warning(ErrorMessage.ActorAlreadyExists, dto.Login);
@@ -56,6 +57,9 @@ public class AuthService : IAuthService
             }
 
             actor = _mapping.Map<Actor>(dto);
+
+            actor.RoleId = 1;
+            actor.Password = HashPassword(dto.Password);
 
             await _actorRepository.CreateAsync(actor);
 
@@ -80,7 +84,8 @@ public class AuthService : IAuthService
     {
         try
         {
-            var actor = await _actorRepository.GetAll().FirstOrDefaultAsync(x => x.Login == dto.Login);
+            var actor = await _actorRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.Login == dto.Login);
             if (actor == null)
             {
                 _logger.Warning(ErrorMessage.DataNotFount, dto.Login);
@@ -100,7 +105,8 @@ public class AuthService : IAuthService
                 };
             }
 
-            var actorToken = await _actorTokenRepository.GetAll().FirstOrDefaultAsync(x => x.ActorId == actor.Id);
+            var actorToken = await _actorTokenRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.ActorId == actor.Id);
 
             var claimes = new List<Claim>()
             {
