@@ -6,8 +6,6 @@ using Trashcan.DAL.DependensyInjection;
 using Trashcan.Domain.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
-// CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("ru-RU");
-// CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
 
 builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddApplication();
