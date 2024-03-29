@@ -1,14 +1,16 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Trashcan.Application.Mapping;
 using Trashcan.Application.Mapping.ActorMapping;
 using Trashcan.Application.Services;
 using Trashcan.Domain.Interfaces.Services;
+using Trashcan.Domain.Settings;
 
 namespace Trashcan.Application.DependensyInjection;
 
 public static class DependensyInjection
 {
-    public static void AddApplication(this IServiceCollection services)
+    public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMappers();
         services.InitServices();
@@ -41,5 +43,7 @@ public static class DependensyInjection
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
+
+        services.AddTransient<IMailService, MailService>();
     }
 }

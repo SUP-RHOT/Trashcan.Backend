@@ -8,5 +8,7 @@ public enum ErrorCode
     ActorAlreadyExists = 11,
     InvalidPassword = 12,
     
-    AddressNotSupported = 21
+    AddressNotSupported = 21,
+
+    MailError = 70
 }

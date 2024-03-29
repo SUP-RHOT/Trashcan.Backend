@@ -34,4 +34,14 @@ public static class Startup
                 };
             });
     }
+
+
+    public static void AddMailConfiguration(this IServiceCollection services, WebApplicationBuilder builder)
+    {
+        builder.Services.Configure<MailSettings>(
+        builder
+            .Configuration
+            .GetSection(nameof(MailSettings))
+    );
+    }
 }

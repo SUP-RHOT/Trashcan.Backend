@@ -1,5 +1,6 @@
 using System.Globalization;
 using Serilog;
+using Trashcan.Api;
 using Trashcan.Application.DependensyInjection;
 using Trashcan.DAL.DependensyInjection;
 using Trashcan.Domain.Settings;
@@ -9,14 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 // CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
 
 builder.Services.AddDataAccessLayer(builder.Configuration);
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddAuthenticationAndAuthorization(builder);
+builder.Services.AddMailConfiguration(builder);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
