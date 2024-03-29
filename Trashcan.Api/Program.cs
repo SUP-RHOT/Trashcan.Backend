@@ -1,5 +1,6 @@
 using System.Globalization;
 using Serilog;
+using Trashcan.Api;
 using Trashcan.Application.DependensyInjection;
 using Trashcan.DAL.DependensyInjection;
 using Trashcan.Domain.Settings;
@@ -12,6 +13,8 @@ builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.AddControllers();
+builder.Services.AddSwagger(builder);
+builder.Services.AddAuthenticationAndAuthorization(builder);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

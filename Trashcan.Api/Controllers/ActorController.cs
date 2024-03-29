@@ -7,7 +7,7 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Api.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class ActorController : ControllerBase
