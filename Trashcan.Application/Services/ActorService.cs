@@ -63,8 +63,11 @@ public class ActorService : IActorService
     {
         try
         {
+            // var actor = await _repository.GetAll()
+            //     .Select(x => _mapper.Map<ActorDto>(x))
+            //     .FirstOrDefaultAsync(x => x.Id == id);
+
             var actor = await _repository.GetAll()
-                .Select(x => _mapper.Map<ActorDto>(x))
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (actor == null)
@@ -79,7 +82,7 @@ public class ActorService : IActorService
 
             return new BaseResult<ActorDto>()
             {
-                Data = actor
+                Data = _mapper.Map<ActorDto>(actor)
             };
         }
         catch (Exception e)

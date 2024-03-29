@@ -6,6 +6,7 @@ public record RegisterActorDto
     string FirstName,
     string? SecondName,
     string Login,
+    string Password,
     string PhoneNumber,
     string Email,
     string City,

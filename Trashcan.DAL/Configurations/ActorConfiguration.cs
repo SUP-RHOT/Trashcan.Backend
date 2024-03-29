@@ -27,7 +27,7 @@ public class ActorConfiguration :  IEntityTypeConfiguration<Actor>
         builder.Property(a => a.House).HasMaxLength(20).IsRequired();
         builder.Property(a => a.Apartament).HasMaxLength(20);
         builder.Property(a => a.Login).HasMaxLength(50).IsRequired();
-        builder.Property(a => a.Password).HasMaxLength(20).IsRequired();
+        builder.Property(a => a.Password).HasMaxLength(100).IsRequired();
         builder.Property(a => a.Status).IsRequired();
         builder.Property(a => a.Mailing).IsRequired();
         builder.HasOne(a => a.ActorToken)
