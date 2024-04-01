@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using MimeKit;
 using Trashcan.Application.Resources;
-using Trashcan.Domain.Dto.EventDto;
 using Trashcan.Domain.Enum;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;

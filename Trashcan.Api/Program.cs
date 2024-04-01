@@ -9,13 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
+
+builder.Services.AddSwagger(builder);
 builder.Services.AddAuthenticationAndAuthorization(builder);
 builder.Services.AddMailConfiguration(builder);
 
+builder.Services.AddCors();
 builder.Services.AddControllers();
-builder.Services.AddSwagger(builder);
-builder.Services.AddAuthenticationAndAuthorization(builder);
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -33,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
