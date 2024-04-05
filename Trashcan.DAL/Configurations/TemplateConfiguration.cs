@@ -12,5 +12,7 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
         builder.Property(t => t.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(t => t.Name).HasMaxLength(150).IsRequired();
         builder.Property(t => t.Text).HasMaxLength(1500).IsRequired();
+
+        builder.HasData(new List<Template>() { new Template() { Id = 1, Name = "string", Text = "string" } });
     }
 }

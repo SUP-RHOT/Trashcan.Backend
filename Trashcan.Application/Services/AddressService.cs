@@ -29,30 +29,33 @@ public class AddressService : IAddressService
     }
 
     /// <inheritdoc />
-    public async Task<BaseResult<AddressDto>> CreateAddressAsync(AddressDto dto)
+    public async Task<BaseResult<int>> CreateAddressByCoordinates(AddressCoordsDto dto)
     {
         try
         {
             if (dto == null)
             {
-                return new BaseResult<AddressDto>()
+                return new BaseResult<int>()
                 {
                     ErrorMassage = ErrorMessage.DataNotFount,
                     ErrorCode = (int)ErrorCode.DataNotFount
                 };
             }
 
-            if (await AddressContainsInBase(dto))
+            if (await AddressCoordinatesContainsInBase(dto))
             {
                 await _repository.CreateAsync(_mapper.Map<Address>(dto));
 
-                return new BaseResult<AddressDto>()
+                return new BaseResult<int>()
                 {
-                    Data = dto
+                    Data =  _repository.GetAll()
+                    .OrderBy(item => item.Id)
+                    .Last()
+                    .Id
                 };
             }
 
-            return new BaseResult<AddressDto>()
+            return new BaseResult<int>()
             {
                 ErrorMassage = ErrorMessage.AddressNotSupported,
                 ErrorCode = (int)ErrorCode.AddressNotSupported
@@ -62,7 +65,51 @@ public class AddressService : IAddressService
         catch (Exception e)
         {
             _logger.Error(e, e.Message);
-            return new BaseResult<AddressDto>()
+            return new BaseResult<int>()
+            {
+                ErrorMassage = ErrorMessage.InternalServerError,
+                ErrorCode = (int)ErrorCode.InternalServerError
+            };
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<BaseResult<int>> CreateAddressByLocation(AddressLocationDto dto)
+    {
+        try
+        {
+            if (dto == null)
+            {
+                return new BaseResult<int>()
+                {
+                    ErrorMassage = ErrorMessage.DataNotFount,
+                    ErrorCode = (int)ErrorCode.DataNotFount
+                };
+            }
+
+            if (await AddressLocationContainsInBase(dto))
+            {
+
+                await _repository.CreateAsync(_mapper.Map<Address>(dto));
+
+                return new BaseResult<int>()
+                {
+                    Data = _repository.GetAll()
+                    .OrderBy(item => item.Id).Last().Id
+                };
+            }
+
+            return new BaseResult<int>()
+            {
+                ErrorMassage = ErrorMessage.AddressNotSupported,
+                ErrorCode = (int)ErrorCode.AddressNotSupported
+            };
+
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return new BaseResult<int>()
             {
                 ErrorMassage = ErrorMessage.InternalServerError,
                 ErrorCode = (int)ErrorCode.InternalServerError
@@ -223,17 +270,17 @@ public class AddressService : IAddressService
     }
 
     /// <inheritdoc />
-    public async Task<BaseResult<AddressDto>> GetAddressByCoordinates(float longitude, float width)
+    public async Task<BaseResult<AddressDto>> GetAddressByCoordinates(AddressCoordsDto dto)
     {
         try
         {
             var address = await _repository.GetAll()
                 .Select(x => _mapper.Map<AddressDto>(x))
-                .FirstOrDefaultAsync(x => x.Longitude == longitude && x.Width == width);
+                .FirstOrDefaultAsync(x => x.Longitude == dto.Longitude && x.Width == dto.Width); ;
 
             if (address == null)
             {
-                _logger.Warning(ErrorMessage.DataNotFount, longitude, width);
+                _logger.Warning(ErrorMessage.DataNotFount, dto);
                 return new BaseResult<AddressDto>()
                 {
                     ErrorMassage = ErrorMessage.DataNotFount,
@@ -258,17 +305,17 @@ public class AddressService : IAddressService
     }
 
     /// <inheritdoc />
-    public async Task<BaseResult<AddressDto>> GetAddressByLocation(string city, string street, string house)
+    public async Task<BaseResult<AddressDto>> GetAddressByLocation(AddressLocationDto dto)
     {
         try
         {
             var address = await _repository.GetAll()
                 .Select(x => _mapper.Map<AddressDto>(x))
-                .FirstOrDefaultAsync(x => x.City == city && x.Street == street && x.House == house);
+                .FirstOrDefaultAsync(x => x.City == dto.City && x.Street == dto.Street && x.House == dto.House);
 
             if (address == null)
             {
-                _logger.Warning(ErrorMessage.DataNotFount, city, street,house);
+                _logger.Warning(ErrorMessage.DataNotFount, dto);
                 return new BaseResult<AddressDto>()
                 {
                     ErrorMassage = ErrorMessage.DataNotFount,
@@ -305,6 +352,52 @@ public class AddressService : IAddressService
                 .FirstOrDefaultAsync(x => x.Longitude == dto.Longitude
                                         && x.Width == dto.Width
                                         && x.City == dto.City
+                                        && x.Street == dto.Street
+                                        && x.House == dto.House);
+
+            return addressBase != null;
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Проверка наличия адреса в базе адресов.
+    /// </summary>
+    /// <param name="dto"> Адрес для проверки. </param>
+    /// <returns> True, если адрес найден, иначе false. </returns>
+    private async Task<bool> AddressCoordinatesContainsInBase(AddressCoordsDto dto)
+    {
+        try
+        {
+            var addressBase = await _addressBaseRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.Longitude == dto.Longitude
+                                        && x.Width == dto.Width);
+
+            return addressBase != null;
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, e.Message);
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// Проверка наличия адреса в базе адресов.
+    /// </summary>
+    /// <param name="dto"> Адрес для проверки. </param>
+    /// <returns> True, если адрес найден, иначе false. </returns>
+    private async Task<bool> AddressLocationContainsInBase(AddressLocationDto dto)
+    {
+        try
+        {
+            var addressBase = await _addressBaseRepository.GetAll()
+                .FirstOrDefaultAsync(x => x.City == dto.City
                                         && x.Street == dto.Street
                                         && x.House == dto.House);
 

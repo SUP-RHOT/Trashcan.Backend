@@ -2,7 +2,7 @@
 using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Entity;
 
-namespace Trashcan.Application.Mapping;
+namespace Trashcan.Application.Mapping.AddressMapping;
 
 public class AddressMapping : Profile
 {

@@ -11,5 +11,7 @@ public class RubricConfiguration : IEntityTypeConfiguration<Rubric>
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Name).HasMaxLength(50).IsRequired();
         builder.Property(r => r.Description).HasMaxLength(150).IsRequired();
+
+        builder.HasData(new List<Rubric>() { new Rubric() { Id = 1, Name = "string", Description = "string", Image = "string", InstitutionId = 1 } });
     }
 }

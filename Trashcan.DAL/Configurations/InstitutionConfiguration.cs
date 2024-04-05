@@ -14,5 +14,7 @@ public class InstitutionConfiguration : IEntityTypeConfiguration<Institution>
         builder.Property(i => i.City).HasMaxLength(100).IsRequired();
         builder.Property(i => i.District).HasMaxLength(100);
         builder.Property(i => i.Description).HasMaxLength(500);
+
+        builder.HasData(new List<Institution>() { new Institution() { Id = 1, City = "string", Description = "string", District = "string", Name = "string" } });
     }
 }

@@ -10,10 +10,10 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
         builder.HasKey(a => a.Id);
         builder.Property(a => a.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(a => a.Longitude).HasMaxLength(10).IsRequired();
-        builder.Property(a => a.Width).HasMaxLength(10).IsRequired();
-        builder.Property(a => a.City).HasMaxLength(100).IsRequired();
-        builder.Property(a => a.Street).HasMaxLength(100).IsRequired();
-        builder.Property(a => a.House).HasMaxLength(20).IsRequired();
+        builder.Property(a => a.Longitude).HasMaxLength(10);
+        builder.Property(a => a.Width).HasMaxLength(10);
+        builder.Property(a => a.City).HasMaxLength(100);
+        builder.Property(a => a.Street).HasMaxLength(100);
+        builder.Property(a => a.House).HasMaxLength(20);
     }
 }

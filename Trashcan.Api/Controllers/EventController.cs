@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
+using Trashcan.Domain.Dto.ActorDTO;
+using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Dto.AuthToken;
+using Trashcan.Domain.Dto.EventDto;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Result;
 
@@ -10,15 +14,16 @@ namespace Trashcan.Api.Controllers
     public class EventController : Controller
     {
         private readonly IEventService _eventService;
-        public EventController(IEventService eventService)
+        private readonly IAddressService _addressService;
+        public EventController(IEventService eventService, IAddressService addressService)
         {
             _eventService = eventService;
+            _addressService = addressService;
         }
 
         [Route("getAll")]
         [HttpGet]
-        ///?
-        public async Task<ActionResult<CollectionResult<TokenDto>>> GetAllEvents()
+        public async Task<ActionResult<CollectionResult<EventDto>>> GetAllEvents()
         {
             var responce = await _eventService.GetEventsAsync();
 
@@ -29,5 +34,46 @@ namespace Trashcan.Api.Controllers
 
             return BadRequest(responce);
         }
+
+        [HttpPost("createByCoords")]
+        public async Task<ActionResult<BaseResult<EventDto>>> CreateEventByCoords([FromBody] EventCoordsDto eventDto)
+        {
+            var addressResponce = await _addressService.CreateAddressByCoordinates(eventDto.AddressDto);
+
+            if (addressResponce.IsSuccess)
+            {
+                var eventResponce = await _eventService.CreateEventAsync(eventDto.EventCreateDto, addressResponce.Data);
+
+                if (eventResponce.IsSuccess)
+                {
+                    return Ok(eventResponce);
+                }
+
+                return BadRequest(eventResponce);
+            }
+
+            return BadRequest(addressResponce);
+        }
+
+        [HttpPost("createByLocation")]
+        public async Task<ActionResult<BaseResult<EventDto>>> CreateEventByLocation([FromBody] EventLocationDto eventDto)
+        {
+            var addressResponce = _addressService.CreateAddressByLocation(eventDto.AddressDto).Result;
+
+            if (addressResponce.IsSuccess)
+            {
+                var eventResponce = await _eventService.CreateEventAsync(eventDto.EventCreateDto, addressResponce.Data);
+
+                if (eventResponce.IsSuccess)
+                {
+                    return Ok(eventResponce);
+                }
+
+                return BadRequest(eventResponce);
+            }
+
+            return BadRequest(addressResponce);
+        }
+
     }
 }

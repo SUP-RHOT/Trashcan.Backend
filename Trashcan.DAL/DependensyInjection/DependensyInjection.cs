@@ -14,7 +14,7 @@ public static class DependensyInjection
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
 		services.AddDbContext<ApplicationDbContext>(options =>
-		options.UseSqlServer(connectionString));
+		    options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
 		services.InitRepositories();
     }

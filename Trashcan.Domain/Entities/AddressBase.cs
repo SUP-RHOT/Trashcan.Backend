@@ -15,26 +15,26 @@ namespace Trashcan.Domain.Entity
 		/// <summary>
 		/// Координаты долготы на карте.
 		/// </summary>
-		public float Longitude { get; set; }
+		public float? Longitude { get; set; }
 
 		/// <summary>
 		/// Координаты широты на карте.
 		/// </summary>
-		public float Width { get; set; }
+		public float? Width { get; set; }
 
 		/// <summary>
 		/// Название города, в котором работает проект.
 		/// </summary>
-		public string City { get; set; }
+		public string? City { get; set; }
 
 		/// <summary>
 		/// Название улицы, которая входит в зону работы проекта.
 		/// </summary>
-		public string Street { get; set; }
+		public string? Street { get; set; }
 
 		/// <summary>
 		/// Номер дома на улице, входящей в зону работы проекта.
 		/// </summary>
-		public string House { get; set; }
+		public string? House { get; set; }
 	}
 }

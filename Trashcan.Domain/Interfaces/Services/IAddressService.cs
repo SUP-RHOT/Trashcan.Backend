@@ -25,8 +25,15 @@ public interface IAddressService
     /// Создание нового происшествия.
     /// </summary>
     /// <param name="dto"> Создаваемое происшествие. </param>
+    /// <returns> Идентификатор созданного адреса. </returns>
+    Task<BaseResult<int>> CreateAddressByCoordinates(AddressCoordsDto dto);
+
+    /// <summary>
+    /// Создание нового происшествия.
+    /// </summary>
+    /// <param name="dto"> Создаваемое происшествие. </param>
     /// <returns> Создаваемое происшествие. </returns>
-    Task<BaseResult<AddressDto>> CreateAddressAsync(AddressDto dto);
+    Task<BaseResult<int>> CreateAddressByLocation(AddressLocationDto dto);
 
     /// <summary>
     /// Удаление происшествия по id.
@@ -45,17 +52,14 @@ public interface IAddressService
     /// <summary>
     /// Получение конкретного происшествия по координатам.
     /// </summary>
-    /// <param name="longitude"> Координаты долготы на карте. </param>
-    /// <param name="width"> Координаты широты на карте. </param>
+    /// <param name="dto"> Координаты. </param>
     /// <returns> Конкретное происшествие. </returns>
-    Task<BaseResult<AddressDto>> GetAddressByCoordinates(float longitude, float width);
+    Task<BaseResult<AddressDto>> GetAddressByCoordinates(AddressCoordsDto dto);
 
     /// <summary>
     /// Получение конкретного происшествия по местоположению.
     /// </summary>
-    /// <param name="city"> Город, в котором произошло происшествие. </param>
-    /// <param name="street"> Название улицы, на которой произошло происшествие. </param>
-    /// <param name="house"> Номер дома на улице, в котором произошло происшествие. </param>
+    /// <param name="dto"> Локация. </param>
     /// <returns> Конкретное происшествие. </returns>
-    Task<BaseResult<AddressDto>> GetAddressByLocation(string city, string street, string house);
+    Task<BaseResult<AddressDto>> GetAddressByLocation(AddressLocationDto dto);
 }

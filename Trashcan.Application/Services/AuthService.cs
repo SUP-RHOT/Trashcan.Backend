@@ -137,7 +137,7 @@ public class AuthService : IAuthService
 
             return new BaseResult<TokenDto>()
             {
-                Data = new TokenDto(accessTocen, refreshToken)
+                Data = new TokenDto(accessTocen, refreshToken, actor.Id)
             };
 
         }

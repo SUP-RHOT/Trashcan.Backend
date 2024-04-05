@@ -25,8 +25,9 @@ public interface IEventService
     /// Создание нового происшествия.
     /// </summary>
     /// <param name="dto"> Создаваемое происшествие. </param>
+    /// <param name="addressId"> Идентификатор адреса. </param>
     /// <returns> Создаваемое происшествие. </returns>
-    Task<BaseResult<EventDto>> CreateEventAsync(EventDto dto);
+    Task<BaseResult<EventDto>> CreateEventAsync(EventCreateDto dto, int addressId);
 
     /// <summary>
     /// Удаление происшествия по id.
@@ -34,13 +35,6 @@ public interface IEventService
     /// <param name="id"> id удаляемого происшествия. </param>
     /// <returns> Удаляемое происшествие. </returns>
     Task<BaseResult<EventDto>> DeleteEventAsync(int id);
-
-    /// <summary>
-    /// Обновление данных конкретного происшествия.
-    /// </summary>
-    /// <param name="dto"> Объект с обновленными данными. </param>
-    /// <returns> Происшествие с обновленными данными. </returns>
-    Task<BaseResult<EventDto>> UpdateEventAsync(EventDto dto);
 
     /// <summary>
     /// Получение всех происшествий актера.

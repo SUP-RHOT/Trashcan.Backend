@@ -114,7 +114,7 @@ public class TokenService : ITokenService
 
             return new BaseResult<TokenDto>()
             {
-                Data = new TokenDto(accessToken, refreshToken)
+                Data = new TokenDto(accessToken, refreshToken, actor.Id)
             };
         }
         catch (Exception e)
