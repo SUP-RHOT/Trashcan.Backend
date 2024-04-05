@@ -15,6 +15,7 @@ namespace Trashcan.Api.Controllers
             _eventService = eventService;
         }
 
+        [Route("getAll")]
         [HttpGet]
         ///?
         public async Task<ActionResult<CollectionResult<TokenDto>>> GetAllEvents()

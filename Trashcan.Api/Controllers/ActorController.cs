@@ -19,7 +19,7 @@ public class ActorController : ControllerBase
         _actorService = actorService;
     }
 
-    //[Route("actor")]
+    [Route("refreshToken")]
     [HttpGet]
     public async Task<ActionResult<BaseResult<ActorDto>>> RefreshToken(int id)
     {
@@ -32,6 +32,7 @@ public class ActorController : ControllerBase
         return BadRequest(response);
     }
 
+    [Route("id")]
     [HttpGet]
     public async Task<ActionResult<BaseResult<ActorDto>>> GetActorById(int id)
     {
