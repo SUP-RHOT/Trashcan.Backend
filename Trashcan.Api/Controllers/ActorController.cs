@@ -31,4 +31,16 @@ public class ActorController : ControllerBase
 
         return BadRequest(response);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<BaseResult<ActorDto>>> GetActorById(int id)
+    {
+        var response = await _actorService.GetActorByIdAsync(id);
+        if (response.IsSuccess)
+        {
+            return Ok(response);
+        }
+
+        return BadRequest(response);
+    }
 }

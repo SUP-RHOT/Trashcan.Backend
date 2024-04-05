@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.UseCors();
+app.UseCors(builder => builder.AllowAnyOrigin());
 
 app.MapControllers();
 
