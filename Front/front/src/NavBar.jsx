@@ -14,11 +14,11 @@ const Navbar = () => {
 
     return (
         <div className="navbar">
-            <button><NavLink to="/musorka">Домой</NavLink></button>
+            <button><NavLink to="/map">Домой</NavLink></button>
             <button>О нас</button>
             <button>Контакты</button>
-            {!isAuth ? <button><NavLink to="/musorka/auth" >Войти</NavLink></button> : <button onClick={logout}>Выйти</button>}
-            {!isAuth ? <button><NavLink to="/musorka/register" >Зарегестрироваться</NavLink></button> : ''}
+            {!isAuth ? <button><NavLink to="/auth" >Войти</NavLink></button> : <button onClick={logout}>Выйти</button>}
+            {!isAuth ? <button><NavLink to="/register" >Зарегестрироваться</NavLink></button> : ''}
 
         </div>
     );

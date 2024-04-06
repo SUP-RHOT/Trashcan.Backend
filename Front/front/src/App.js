@@ -6,20 +6,25 @@ import './styles/App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {AuthContext} from "./context";
 import {useEffect, useState} from "react";
+import MapComponent from "./map";
 
 const router = createBrowserRouter([
   {
-      path: "/musorka/",
+      path: "/",
       element: <HomePage/>,
       children:[
           {
-              path: "/musorka/auth",
+              path: "/auth",
               element: <AuthPage/>,
           },
           {
-            path: "/musorka/register",
+            path: "/register",
             element: <RegistrationForm/>,
-        }
+          },
+          {
+              path: "/map",
+              element: <MapComponent/>,
+          }
       ]
   },
 ]);
