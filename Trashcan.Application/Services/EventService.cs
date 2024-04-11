@@ -75,12 +75,8 @@ namespace Trashcan.Application.Services
                     };
                 }
 
-
-
-
-                var eventData = new EventDto
+                var eventData = new EventDataDTO
                 (
-                    dto.Id,
                     dto.Status,
                     dto.TypeMessage,
                     dto.TextMessage,
@@ -97,7 +93,7 @@ namespace Trashcan.Application.Services
 
                 return new BaseResult<EventDto>()
                 {
-                    Data = eventData
+                    Data = _mapper.Map <EventDto> (_eventRepository.GetAll().OrderBy(item => item.Id).Last())
                 };
 
             }

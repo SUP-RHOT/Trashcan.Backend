@@ -1,6 +1,6 @@
 ﻿namespace Trashcan.Domain.Dto.EventDto;
 
-public record EventCreateDto
+public record EventDataDTO
 (
     bool Status,
     string TypeMessage,
@@ -9,6 +9,7 @@ public record EventCreateDto
     DateTime Date,
     bool Result,
     int ActorId,
-    string RubricName,
-    string TemplateName
+    int RubricId,
+    int AddressId,
+    int TemplateId
 );

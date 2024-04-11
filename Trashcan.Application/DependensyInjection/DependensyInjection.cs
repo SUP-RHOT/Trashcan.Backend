@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Trashcan.Application.Mapping;
 using Trashcan.Application.Mapping.ActorMapping;
 using Trashcan.Application.Mapping.AddressMapping;
+using Trashcan.Application.Mapping.EventMapping;
 using Trashcan.Application.Services;
 using Trashcan.Domain.Interfaces.Services;
 using Trashcan.Domain.Settings;
