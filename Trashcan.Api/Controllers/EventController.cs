@@ -23,7 +23,7 @@ namespace Trashcan.Api.Controllers
 
         [Route("getAll")]
         [HttpGet]
-        public async Task<ActionResult<CollectionResult<EventDto>>> GetAllEvents()
+        public async Task<ActionResult<CollectionResult<EventInfoDto>>> GetAllEvents()
         {
             var responce = await _eventService.GetEventsAsync();
 

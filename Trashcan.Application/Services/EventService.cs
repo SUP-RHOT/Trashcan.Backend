@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Serilog;
 using Trashcan.Application.Resources;
+using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Dto.EventDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
@@ -18,15 +18,17 @@ namespace Trashcan.Application.Services
         private readonly IBaseRepository<Event> _eventRepository;
         private readonly IBaseRepository<Rubric> _rubricRepository;
         private readonly IBaseRepository<Template> _templateRepository;
+        private readonly IBaseRepository<Address> _addressRepository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
         public EventService
             (
-            IBaseRepository<Event> repository, 
-            IBaseRepository<Template> templateRepository, 
-            IBaseRepository<Rubric> rubricRepository,  
-            ILogger logger, 
+            IBaseRepository<Event> repository,
+            IBaseRepository<Template> templateRepository,
+            IBaseRepository<Rubric> rubricRepository,
+            IBaseRepository<Address> addressRepository,
+            ILogger logger,
             IMapper mapper
             )
         {
@@ -35,6 +37,7 @@ namespace Trashcan.Application.Services
             _mapper = mapper;
             _templateRepository = templateRepository;
             _rubricRepository = rubricRepository;
+            _addressRepository = addressRepository;
         }
 
         /// <inheritdoc />
@@ -50,7 +53,7 @@ namespace Trashcan.Application.Services
                         ErrorCode = (int)ErrorCode.DataNotFount
                     };
                 }
-                var rubric  = _rubricRepository.GetAll()
+                var rubric = _rubricRepository.GetAll()
                     .FirstOrDefaultAsync(x => x.Name == dto.RubricName).Result;
 
                 if (rubric == null)
@@ -93,7 +96,7 @@ namespace Trashcan.Application.Services
 
                 return new BaseResult<EventDto>()
                 {
-                    Data = _mapper.Map <EventDto> (_eventRepository.GetAll().OrderBy(item => item.Id).Last())
+                    Data = _mapper.Map<EventDto>(_eventRepository.GetAll().OrderBy(item => item.Id).Last())
                 };
 
             }
@@ -180,7 +183,7 @@ namespace Trashcan.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<CollectionResult<EventDto>> GetEventsAsync()
+        public async Task<CollectionResult<EventInfoDto>> GetEventsAsync()
         {
             try
             {
@@ -191,23 +194,19 @@ namespace Trashcan.Application.Services
                 if (!events.Any())
                 {
                     _logger.Warning(ErrorMessage.DataNotFount, events.Length);
-                    return new CollectionResult<EventDto>()
+                    return new CollectionResult<EventInfoDto>()
                     {
                         ErrorMassage = ErrorMessage.DataNotFount,
                         ErrorCode = (int)ErrorCode.DataNotFount
                     };
                 }
 
-                return new CollectionResult<EventDto>()
-                {
-                    Data = events,
-                    Count = events.Length
-                };
+                return GetEventsInfo(events);
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
-                return new CollectionResult<EventDto>()
+                return new CollectionResult<EventInfoDto>()
                 {
                     ErrorMassage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCode.InternalServerError
@@ -250,6 +249,40 @@ namespace Trashcan.Application.Services
                     ErrorCode = (int)ErrorCode.InternalServerError
                 };
             }
+        }
+
+        private async Task<BaseResult<EventInfoDto>> GetEventInfo(EventDto dto)
+        {
+            var address = await _addressRepository.GetAll()
+                   .FirstOrDefaultAsync(x => x.Id == dto.AddressId);
+
+            return new BaseResult<EventInfoDto>()
+            {
+                Data = new EventInfoDto(
+                    dto.Id,
+                    dto.Status,
+                    dto.TypeMessage,
+                    dto.TextMessage,
+                    dto.Photo,
+                    dto.Date,
+                    dto.Result,
+                    address
+                )
+            };
+        }
+
+        private CollectionResult<EventInfoDto> GetEventsInfo(EventDto[] events)
+        {
+            var eventsInfo = new List<EventInfoDto>();
+
+            foreach (var eventEl in events)
+                eventsInfo.Add(GetEventInfo(eventEl).Result.Data);
+
+            return new CollectionResult<EventInfoDto>()
+            {
+                Data = eventsInfo.ToArray(),
+                Count = eventsInfo.Count()
+            };
         }
     }
 }

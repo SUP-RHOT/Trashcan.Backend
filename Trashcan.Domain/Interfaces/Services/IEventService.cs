@@ -12,7 +12,7 @@ public interface IEventService
     /// Получение всех происшествий.
     /// </summary>
     /// <returns> Массив происшествий. </returns>
-    Task<CollectionResult<EventDto>> GetEventsAsync();
+    Task<CollectionResult<EventInfoDto>> GetEventsAsync();
 
     /// <summary>
     /// Получение конкретного происшествия по id.
