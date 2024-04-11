@@ -42,8 +42,8 @@ public class AddressService : IAddressService
                 };
             }
 
-            if (await AddressCoordinatesContainsInBase(dto))
-            {
+            //if (await AddressCoordinatesContainsInBase(dto))
+            //{
                 await _repository.CreateAsync(_mapper.Map<Address>(dto));
 
                 return new BaseResult<int>()
@@ -53,13 +53,13 @@ public class AddressService : IAddressService
                     .Last()
                     .Id
                 };
-            }
+            /*}
 
             return new BaseResult<int>()
             {
                 ErrorMassage = ErrorMessage.AddressNotSupported,
                 ErrorCode = (int)ErrorCode.AddressNotSupported
-            };
+            };*/
 
         }
         catch (Exception e)
@@ -87,8 +87,8 @@ public class AddressService : IAddressService
                 };
             }
 
-            if (await AddressLocationContainsInBase(dto))
-            {
+            /*if (await AddressLocationContainsInBase(dto))
+            {*/
 
                 await _repository.CreateAsync(_mapper.Map<Address>(dto));
 
@@ -97,13 +97,13 @@ public class AddressService : IAddressService
                     Data = _repository.GetAll()
                     .OrderBy(item => item.Id).Last().Id
                 };
-            }
+           /* }
 
             return new BaseResult<int>()
             {
                 ErrorMassage = ErrorMessage.AddressNotSupported,
                 ErrorCode = (int)ErrorCode.AddressNotSupported
-            };
+            };*/
 
         }
         catch (Exception e)
@@ -242,21 +242,21 @@ public class AddressService : IAddressService
                 };
             }
 
-            if (await AddressContainsInBase(dto))
-            {
+            /*if (await AddressContainsInBase(dto))
+            {*/
                 await _repository.UpdateAsync(_mapper.Map<Address>(dto));
 
                 return new BaseResult<AddressDto>()
                 {
                     Data = dto
                 };
-            }
+           /* }
 
             return new BaseResult<AddressDto>()
             {
                 ErrorMassage = ErrorMessage.AddressNotSupported,
                 ErrorCode = (int)ErrorCode.AddressNotSupported
-            };
+            };*/
         }
         catch (Exception e)
         {

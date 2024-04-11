@@ -251,6 +251,11 @@ namespace Trashcan.Application.Services
             }
         }
 
+        /// <summary>
+        /// Получить часть информации об событии.
+        /// </summary>
+        /// <param name="dto"> Событие. </param>
+        /// <returns> Информация по событию. </returns>
         private async Task<BaseResult<EventInfoDto>> GetEventInfo(EventDto dto)
         {
             var address = await _addressRepository.GetAll()
@@ -271,6 +276,11 @@ namespace Trashcan.Application.Services
             };
         }
 
+        /// <summary>
+        /// Получить информацию по событиям.
+        /// </summary>
+        /// <param name="events"> События для дополнения информацией. </param>
+        /// <returns> События с дополнительной информацией. </returns>
         private CollectionResult<EventInfoDto> GetEventsInfo(EventDto[] events)
         {
             var eventsInfo = new List<EventInfoDto>();
