@@ -21,6 +21,10 @@ namespace Trashcan.Api.Controllers
             _addressService = addressService;
         }
 
+        /// <summary>
+        /// Вывод всех проишествий.
+        /// </summary>
+        /// <returns> Массив со всеми проишествиями. </returns>
         [Route("getAll")]
         [HttpGet]
         public async Task<ActionResult<CollectionResult<EventInfoDto>>> GetAllEvents()
@@ -35,6 +39,11 @@ namespace Trashcan.Api.Controllers
             return BadRequest(responce);
         }
 
+        /// <summary>
+        /// Создание проишествия на основе координат.
+        /// </summary>
+        /// <param name="eventDto"> Данные о проишествии. </param>
+        /// <returns> Проишествие. </returns>
         [HttpPost("createByCoords")]
         public async Task<ActionResult<BaseResult<EventDto>>> CreateEventByCoords([FromBody] EventCoordsDto eventDto)
         {
@@ -55,6 +64,11 @@ namespace Trashcan.Api.Controllers
             return BadRequest(addressResponce);
         }
 
+        /// <summary>
+        /// Создание проишествия на основе адреса.
+        /// </summary>
+        /// <param name="eventDto"> Данные о проишествии. </param>
+        /// <returns> Проишествие. </returns>
         [HttpPost("createByLocation")]
         public async Task<ActionResult<BaseResult<EventDto>>> CreateEventByLocation([FromBody] EventLocationDto eventDto)
         {
@@ -75,6 +89,11 @@ namespace Trashcan.Api.Controllers
             return BadRequest(addressResponce);
         }
 
+        /// <summary>
+        /// Удаление проишествия.
+        /// </summary>
+        /// <param name="Id"> Id удаляемолго проишствия. </param>
+        /// <returns> Удаляемое проишествие. </returns>
         [HttpDelete("deleteEvent")]
         public async Task<ActionResult<BaseResult<EventDto>>> DeleteEvent(int Id)
         {

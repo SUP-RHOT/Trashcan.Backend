@@ -17,10 +17,11 @@ public class TemplateController : Controller
     }
 
     /// <summary>
-    /// Создание новой рубрики.
+    /// Создание нового шаблона.
     /// </summary>
-    /// <param name="dto"> Создоваемая рубрика. </param>
-    /// <returns> Создоваемая рубрика. </returns>
+    /// <param name="dto"> Создоваемый шаблон. </param>
+    /// <returns> Создоваемый шаблон. </returns>
+    [HttpPost]
     public async Task<ActionResult<BaseResult<TemplateDto>>> CreateTemplate(TemplateDto dto)
     {
         var response = await _templateService.CreateTemplateAsync(dto);
@@ -34,9 +35,10 @@ public class TemplateController : Controller
     }
     
     /// <summary>
-    /// Вывод всех рубрик.
+    /// Вывод всех шаблонов.
     /// </summary>
-    /// <returns> Массив со всеми рубриками. </returns>
+    /// <returns> Массив со всеми шаблонами. </returns>
+    [HttpGet]
     public async Task<ActionResult<CollectionResult<TemplateDto>>> GetTemplate()
     {
         var response = await _templateService.GetTemplatesAsync();
@@ -50,10 +52,11 @@ public class TemplateController : Controller
     }
 
     /// <summary>
-    /// Обновление данных рубрики.
+    /// Обновление данных шаблона.
     /// </summary>
-    /// <param name="dto"> Данные рубрики. </param>
-    /// <returns> Рубрика с обновленными данными. </returns>
+    /// <param name="dto"> Данные шаблона. </param>
+    /// <returns> Шаблон с обновленными данными. </returns>
+    [HttpPut]
     public async Task<ActionResult<BaseResult<TemplateDto>>> UpdateTemplate(TemplateDto dto)
     {
         var response = await _templateService.UpdateTemplateAsync(dto);
@@ -67,10 +70,11 @@ public class TemplateController : Controller
     }
     
     /// <summary>
-    /// Удаление существующей рубрики.
+    /// Удаление существующего шаблона.
     /// </summary>
-    /// <param name="id"> Id удаляемой рубрики. </param>
-    /// <returns> Удаляемая рубрика. </returns>
+    /// <param name="id"> Id удаляемого щаблона. </param>
+    /// <returns> Удаляемый шаблон. </returns>
+    [HttpDelete]
     public async Task<ActionResult<BaseResult<TemplateDto>>> DeleteTemplate(int id)
     {
         var response = await _templateService.DeleteTemplateAsync(id);

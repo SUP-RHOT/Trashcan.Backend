@@ -16,7 +16,12 @@ public class AuthController : ControllerBase
     {
         _authService = authService;
     }
-
+    
+    /// <summary>
+    /// Регистрация дользователя.
+    /// </summary>
+    /// <param name="dto"> Данные для регистрации. </param>
+    /// <returns> Результат регистрации. </returns>
     [HttpPost("register")]
     public async Task<ActionResult<BaseResult<string>>> Register([FromBody] RegisterActorDto dto)
     {
@@ -29,6 +34,11 @@ public class AuthController : ControllerBase
         return BadRequest(response);
     }
     
+    /// <summary>
+    /// Авторизация пользователяю
+    /// </summary>
+    /// <param name="dto"> Днные для авторизации. </param>
+    /// <returns> Jwt-токены (Access и Refresh).  </returns>
     [HttpPost("login")]
     public async Task<ActionResult<BaseResult<TokenDto>>> Login([FromBody] LoginActorDto dto)
     {

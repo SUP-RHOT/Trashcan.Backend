@@ -16,6 +16,11 @@ public class TokenController : ControllerBase
         _tokenService = tokenService;
     }
 
+    /// <summary>
+    /// Обновление Jwt-токенов. 
+    /// </summary>
+    /// <param name="tokenDto"> Jwt-токены (Access и Refresh) </param>
+    /// <returns> Обновленные токены. </returns>
     [HttpPost]
     [Route("refresh")]
     public async Task<ActionResult<BaseResult<TokenDto>>> RefreshToken([FromBody] TokenDto tokenDto)

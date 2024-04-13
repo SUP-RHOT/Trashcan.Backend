@@ -19,6 +19,11 @@ public class ActorController : ControllerBase
         _actorService = actorService;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [Route("refreshToken")]
     [HttpGet]
     public async Task<ActionResult<BaseResult<ActorDto>>> RefreshToken(int id)
@@ -31,12 +36,49 @@ public class ActorController : ControllerBase
 
         return BadRequest(response);
     }
-
-    [Route("id")]
+    
+    /// <summary>
+    /// Получение пользователя по Id.
+    /// </summary>
+    /// <param name="id">Id пользователя.</param>
+    /// <returns> Пользователь. </returns>
     [HttpGet]
     public async Task<ActionResult<BaseResult<ActorDto>>> GetActorById(int id)
     {
         var response = await _actorService.GetActorByIdAsync(id);
+        if (response.IsSuccess)
+        {
+            return Ok(response);
+        }
+
+        return BadRequest(response);
+    }
+
+    /// <summary>
+    /// Обновление данных о пользователе.
+    /// </summary>
+    /// <param name="dto"> Обновленные данные. </param>
+    /// <returns> Пользователь с объповленными данными. </returns>
+    [HttpPut]
+    public async Task<ActionResult<BaseResult<ActorDto>>> UpdateActor(ActorDto dto)
+    {
+        var response = await _actorService.UpdateActorAsync(dto);
+        if (response.IsSuccess)
+        {
+            return Ok(response);
+        }
+
+        return BadRequest(response);
+    }
+
+    /// <summary>
+    /// Получение списка всех пользователей.
+    /// </summary>
+    /// <returns> Массив со всеми пользователями. </returns>
+    [HttpGet]
+    public async Task<ActionResult<CollectionResult<ActorDto>>> GetActor()
+    {
+        var response = await _actorService.GetActorAsync();
         if (response.IsSuccess)
         {
             return Ok(response);

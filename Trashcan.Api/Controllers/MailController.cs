@@ -15,6 +15,13 @@ namespace Trashcan.Api.Controllers
             _mailService = mail;
         }
 
+        /// <summary>
+        /// Отправка сообщений на почту.
+        /// </summary>
+        /// <param name="email"> Адрес получателя. </param>
+        /// <param name="subject"> Тема сообщения. </param>
+        /// <param name="message"> Текст сообщения. </param>
+        /// <returns> Сообщение. </returns>
         [HttpPost]
         public async Task<ActionResult<BaseResult<bool>>> SendMailAsync(string email, string subject, string message)
         {

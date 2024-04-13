@@ -19,6 +19,7 @@ public class RubricController : ControllerBase
     /// </summary>
     /// <param name="dto"> Создоваемая рубрика. </param>
     /// <returns> Создоваемая рубрика. </returns>
+    [HttpPost]
     public async Task<ActionResult<BaseResult<RubricDto>>> CreateRubric(RubricDto dto)
     {
         var response = await _rubricService.CreateRubricAsync(dto);
@@ -35,6 +36,7 @@ public class RubricController : ControllerBase
     /// Вывод всех рубрик.
     /// </summary>
     /// <returns> Массив со всеми рубриками. </returns>
+    [HttpGet]
     public async Task<ActionResult<CollectionResult<RubricDto>>> GetRubric()
     {
         var response = await _rubricService.GetRubricsAsync();
@@ -52,6 +54,7 @@ public class RubricController : ControllerBase
     /// </summary>
     /// <param name="dto"> Данные рубрики. </param>
     /// <returns> Рубрика с обновленными данными. </returns>
+    [HttpPut]
     public async Task<ActionResult<BaseResult<RubricDto>>> UpdateRubric(RubricDto dto)
     {
         var response = await _rubricService.UpdateRubricAsync(dto);
@@ -69,6 +72,7 @@ public class RubricController : ControllerBase
     /// </summary>
     /// <param name="id"> Id удаляемой рубрики. </param>
     /// <returns> Удаляемая рубрика. </returns>
+    [HttpDelete]
     public async Task<ActionResult<BaseResult<RubricDto>>> DeleteRubric(int id)
     {
         var response = await _rubricService.DeleteRubricAsync(id);
