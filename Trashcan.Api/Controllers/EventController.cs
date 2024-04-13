@@ -75,5 +75,18 @@ namespace Trashcan.Api.Controllers
             return BadRequest(addressResponce);
         }
 
+        [HttpDelete("deleteEvent")]
+        public async Task<ActionResult<BaseResult<EventDto>>> DeleteEvent(int Id)
+        {
+            var response = await _eventService.DeleteEventAsync(Id);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+                
+            }
+
+            return BadRequest(response);
+        }
     }
 }
