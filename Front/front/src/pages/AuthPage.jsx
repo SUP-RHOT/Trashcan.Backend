@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
-import "./styles/AuthPage.css"
-import {AuthContext} from "./context";
+import "../styles/AuthPage.css"
+import {AuthContext} from "../context";
 import {useNavigate} from "react-router-dom";
-import {login, registration} from "./http/userAPI";
+import {getActor, login} from "../http/userAPI";
 
 const AuthPage = () => {
 
@@ -11,6 +11,7 @@ const AuthPage = () => {
 
     const [log, setLog] = useState()
     const [password, setPassword] = useState()
+    const [jopka, setJopka] = useState()
 
     // const login = event => {
     //     event.preventDefault();
@@ -21,7 +22,12 @@ const AuthPage = () => {
 
     const signIn = async() =>{
         const responce = await login(log, password)
+        setIsAuth(true)
+        const actor = await getActor(responce.data.data.id)
+        localStorage.setItem('actor', JSON.stringify(actor.data.data))
+        navigate('/map')
         console.log(responce)
+        console.log(actor)
     }
 
     return (

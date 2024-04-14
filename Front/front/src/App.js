@@ -1,12 +1,17 @@
 
-import AuthPage from './AuthPage';
-import HomePage from './HomePage';
+import AuthPage from './pages/AuthPage';
+import HomePage from './pages/HomePage';
 import RegistrationForm from './pages/RegistrationPage';
 import './styles/App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {AuthContext} from "./context";
-import {useEffect, useState} from "react";
-import MapComponent from "./map";
+import {AuthContext, CurMarkerLock} from "./context";
+import {useEffect, useState, } from "react";
+import MapComponent from "./pages/map";
+import Profile from "./pages/Profile";
+import AddressForm from "./pages/AddressForm";
+import AdminPanel from "./pages/AdminPanel";
+import EditProfile from "./pages/EditProfile";
+
 
 const router = createBrowserRouter([
   {
@@ -24,29 +29,53 @@ const router = createBrowserRouter([
           {
               path: "/map",
               element: <MapComponent/>,
+          },
+          {
+              path: "/profile",
+              element: <Profile/>,
+          },
+          {
+              path: "/profile/edit",
+              element: <EditProfile/>,
+          },
+          {
+              path: "/addressForm",
+              element: <AddressForm/>,
+          },
+          {
+              path: "/adminPanel",
+              element: <AdminPanel/>,
           }
+
       ]
   },
 ]);
 
+
 function App() {
 
     const [isAuth, setIsAuth] = useState(false)
+    const [curMarker, setCurMarker] = useState(null);
     useEffect(() =>{
-        if (localStorage.getItem('auth')){
+        if (localStorage.getItem('token')){
             setIsAuth(true)
         }
     })
 
   return (
-      <AuthContext.Provider value={{
-          isAuth,
-          setIsAuth
+      <CurMarkerLock.Provider value={{
+          curMarker,
+          setCurMarker
       }}>
-          <div className='app-container'>
-              <RouterProvider router={router} />
-          </div>
-      </AuthContext.Provider>
+          <AuthContext.Provider value={{
+              isAuth,
+              setIsAuth
+          }}>
+              <div className='app-container'>
+                  <RouterProvider router={router} />
+              </div>
+          </AuthContext.Provider>
+      </CurMarkerLock.Provider>
   );
 }
 

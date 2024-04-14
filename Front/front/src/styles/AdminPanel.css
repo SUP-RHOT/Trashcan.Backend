@@ -1,0 +1,13 @@
+.admin-panel {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-panel h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}

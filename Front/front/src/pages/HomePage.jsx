@@ -1,6 +1,6 @@
 import React from 'react';
-import './styles/HomePage.css';
-import Navbar from './NavBar';
+import '../styles/HomePage.css';
+import Navbar from '../components/NavBar';
 import {
     Outlet,
     useNavigate
@@ -11,7 +11,7 @@ const HomePage = () => {
         <div>
             <Navbar/>
             <div className="home-container">
-                <div id="detail">
+                <div style={{marginTop:'700px'}} id="detail">
                     <Outlet />
                 </div>
                 

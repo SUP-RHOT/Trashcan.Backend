@@ -36,7 +36,8 @@ const RegistrationForm = () => {
     }
 
     const signIn = async() =>{
-        const responce = await registration(user.lastName, user.firstName, user.secondName, user.login, user.password, user.phoneNumber, user.city, user.street, user.house, user.apartment)
+        const responce = await registration(user)
+        navigate('/auth')
         console.log(responce)
     }
 
