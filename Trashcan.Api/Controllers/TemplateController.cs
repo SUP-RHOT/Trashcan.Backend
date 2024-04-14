@@ -7,6 +7,8 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Api.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 public class TemplateController : Controller
 {
     private readonly ITemplateService _templateService;

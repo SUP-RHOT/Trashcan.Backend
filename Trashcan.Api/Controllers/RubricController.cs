@@ -5,6 +5,8 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Api.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 public class RubricController : ControllerBase
 {
     private readonly IRubricService _rubricService;
