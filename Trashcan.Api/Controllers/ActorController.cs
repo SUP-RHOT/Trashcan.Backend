@@ -36,12 +36,13 @@ public class ActorController : ControllerBase
 
         return BadRequest(response);
     }
-    
+
     /// <summary>
     /// Получение пользователя по Id.
     /// </summary>
     /// <param name="id">Id пользователя.</param>
     /// <returns> Пользователь. </returns>
+    [Route("getActor")]
     [HttpGet]
     public async Task<ActionResult<BaseResult<ActorDto>>> GetActorById(int id)
     {
@@ -58,7 +59,8 @@ public class ActorController : ControllerBase
     /// Обновление данных о пользователе.
     /// </summary>
     /// <param name="dto"> Обновленные данные. </param>
-    /// <returns> Пользователь с объповленными данными. </returns>
+    /// <returns> Пользователь с обновленными данными. </returns>
+    [Route("updateActor")]
     [HttpPut]
     public async Task<ActionResult<BaseResult<ActorDto>>> UpdateActor(ActorDto dto)
     {
@@ -75,6 +77,7 @@ public class ActorController : ControllerBase
     /// Получение списка всех пользователей.
     /// </summary>
     /// <returns> Массив со всеми пользователями. </returns>
+    [Route("getActors")]
     [HttpGet]
     public async Task<ActionResult<CollectionResult<ActorDto>>> GetActor()
     {

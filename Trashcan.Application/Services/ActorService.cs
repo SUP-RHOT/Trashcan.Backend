@@ -16,12 +16,14 @@ public class ActorService : IActorService
     private readonly IBaseRepository<Actor> _repository;
     private readonly ILogger _logger;
     private readonly IMapper _mapper;
+    private readonly IMailService _mailService;
 
-    public ActorService(IBaseRepository<Actor> repository, ILogger logger, IMapper mapper)
+    public ActorService(IBaseRepository<Actor> repository, ILogger logger, IMapper mapper, IMailService mailService)
     {
         _repository = repository;
         _logger = logger;
         _mapper = mapper;
+        _mailService = mailService;
     }
 
     public async Task<CollectionResult<ActorDto>> GetActorAsync()
@@ -148,6 +150,7 @@ public class ActorService : IActorService
             }
 
             await _repository.RemoveAsync(actor);
+            await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Ваш аккаунт удален.");
 
             return new BaseResult<ActorDto>()
             {
@@ -184,6 +187,8 @@ public class ActorService : IActorService
             
             await _repository.UpdateAsync(_mapper.Map<Actor>(dto));
 
+            await _mailService.SendAsync(dto.Email, "SUPЕRHOT", "Ваши данные обновлены.");
+
             return new BaseResult<ActorDto>()
             {
                 Data = dto
@@ -200,5 +205,3 @@ public class ActorService : IActorService
         }
     }
 }
-
-

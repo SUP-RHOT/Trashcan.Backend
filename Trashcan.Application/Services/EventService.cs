@@ -19,8 +19,10 @@ namespace Trashcan.Application.Services
         private readonly IBaseRepository<Rubric> _rubricRepository;
         private readonly IBaseRepository<Template> _templateRepository;
         private readonly IBaseRepository<Address> _addressRepository;
+        private readonly IBaseRepository<Actor> _actorRepository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IMailService _mailService;
 
         public EventService
             (
@@ -28,8 +30,10 @@ namespace Trashcan.Application.Services
             IBaseRepository<Template> templateRepository,
             IBaseRepository<Rubric> rubricRepository,
             IBaseRepository<Address> addressRepository,
+            IBaseRepository<Actor> actorRepository,
             ILogger logger,
-            IMapper mapper
+            IMapper mapper,
+            IMailService mailService
             )
         {
             _eventRepository = repository;
@@ -38,6 +42,8 @@ namespace Trashcan.Application.Services
             _templateRepository = templateRepository;
             _rubricRepository = rubricRepository;
             _addressRepository = addressRepository;
+            _actorRepository = actorRepository;
+            _mailService = mailService;
         }
 
         /// <inheritdoc />
@@ -94,6 +100,11 @@ namespace Trashcan.Application.Services
 
                 await _eventRepository.CreateAsync(_mapper.Map<Event>(eventData));
 
+                var actor = _actorRepository.GetAll()
+                    .FirstOrDefaultAsync(x => x.Id == dto.ActorId).Result;
+
+                await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно создано.");
+
                 return new BaseResult<EventDto>()
                 {
                     Data = _mapper.Map<EventDto>(_eventRepository.GetAll().OrderBy(item => item.Id).Last())
@@ -130,6 +141,11 @@ namespace Trashcan.Application.Services
                 }
 
                 await _eventRepository.RemoveAsync(eventToDelete);
+
+                var actor = _actorRepository.GetAll()
+                   .FirstOrDefaultAsync(x => x.Id == eventToDelete.ActorId).Result;
+
+                await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно удалено.");
 
                 return new BaseResult<EventDto>()
                 {

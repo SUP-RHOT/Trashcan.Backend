@@ -21,16 +21,19 @@ public class AuthService : IAuthService
     private readonly IBaseRepository<Actor> _actorRepository;
     private readonly IBaseRepository<ActorToken> _actorTokenRepository;
     private readonly ITokenService _tokenService;
+    private readonly IMailService _mailService;
+
     
     private readonly ILogger _logger;
     private readonly IMapper _mapping;
 
     public AuthService(
-        IBaseRepository<Actor> actorRepository, 
-        ILogger logger, 
-        IMapper mapping, 
-        IBaseRepository<ActorToken> actorTokenRepository, 
-        ITokenService tokenService
+        IBaseRepository<Actor> actorRepository,
+        ILogger logger,
+        IMapper mapping,
+        IBaseRepository<ActorToken> actorTokenRepository,
+        ITokenService tokenService,
+        IMailService mailService
         )
     {
         _actorRepository = actorRepository;
@@ -38,6 +41,7 @@ public class AuthService : IAuthService
         _mapping = mapping;
         _actorTokenRepository = actorTokenRepository;
         _tokenService = tokenService;
+        _mailService = mailService;
     }
 
     public async Task<BaseResult<RegisterActorDto>> Register(RegisterActorDto dto)
@@ -62,6 +66,7 @@ public class AuthService : IAuthService
             actor.Password = HashPassword(dto.Password);
 
             await _actorRepository.CreateAsync(actor);
+            await _mailService.SendAsync(dto.Email, "SUPЕRHOT", "Вы успешно зарегистрировались.");
 
             return new BaseResult<RegisterActorDto>()
             {
@@ -134,6 +139,7 @@ public class AuthService : IAuthService
                 actorToken.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             }
 
+            await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Выполнен вход в ваш аккаунт.");
 
             return new BaseResult<TokenDto>()
             {
