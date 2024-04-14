@@ -11,6 +11,7 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Application.Services;
 
+/// <inheritdoc />
 public class ActorService : IActorService
 {
     private readonly IBaseRepository<Actor> _repository;
@@ -26,6 +27,7 @@ public class ActorService : IActorService
         _mailService = mailService;
     }
 
+    /// <inheritdoc />
     public async Task<CollectionResult<ActorDto>> GetActorAsync()
     {
         try
@@ -61,6 +63,7 @@ public class ActorService : IActorService
         }
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<ActorDto>> GetActorByIdAsync(int id)
     {
         try
@@ -100,6 +103,7 @@ public class ActorService : IActorService
 
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<ActorDto>> CreateActorAsync(ActorDto? dto)
     {
         try
@@ -132,13 +136,14 @@ public class ActorService : IActorService
         }
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<ActorDto>> DeleteActorAsync(int id)
     {
         try
         {
             var actor = await _repository.GetAll()
                 .FirstOrDefaultAsync(x => x.Id == id);
-            
+
             if (actor == null)
             {
                 _logger.Warning(ErrorMessage.DataNotFount, id);
@@ -168,6 +173,7 @@ public class ActorService : IActorService
         }
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<ActorDto>> UpdateActorAsync(ActorDto dto)
     {
         try
@@ -184,7 +190,7 @@ public class ActorService : IActorService
                     ErrorCode = (int)ErrorCode.DataNotFount
                 };
             }
-            
+
             await _repository.UpdateAsync(_mapper.Map<Actor>(dto));
 
             await _mailService.SendAsync(dto.Email, "SUPЕRHOT", "Ваши данные обновлены.");

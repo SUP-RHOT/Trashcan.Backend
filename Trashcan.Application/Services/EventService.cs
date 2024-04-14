@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Trashcan.Application.Resources;
-using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Dto.EventDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;

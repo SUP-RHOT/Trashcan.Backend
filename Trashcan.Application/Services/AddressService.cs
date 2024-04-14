@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Trashcan.Application.Resources;
-using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.AddressDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
@@ -44,15 +43,15 @@ public class AddressService : IAddressService
 
             //if (await AddressCoordinatesContainsInBase(dto))
             //{
-                await _repository.CreateAsync(_mapper.Map<Address>(dto));
+            await _repository.CreateAsync(_mapper.Map<Address>(dto));
 
-                return new BaseResult<int>()
-                {
-                    Data =  _repository.GetAll()
-                    .OrderBy(item => item.Id)
-                    .Last()
-                    .Id
-                };
+            return new BaseResult<int>()
+            {
+                Data = _repository.GetAll()
+                .OrderBy(item => item.Id)
+                .Last()
+                .Id
+            };
             /*}
 
             return new BaseResult<int>()
@@ -90,20 +89,20 @@ public class AddressService : IAddressService
             /*if (await AddressLocationContainsInBase(dto))
             {*/
 
-                await _repository.CreateAsync(_mapper.Map<Address>(dto));
-
-                return new BaseResult<int>()
-                {
-                    Data = _repository.GetAll()
-                    .OrderBy(item => item.Id).Last().Id
-                };
-           /* }
+            await _repository.CreateAsync(_mapper.Map<Address>(dto));
 
             return new BaseResult<int>()
             {
-                ErrorMassage = ErrorMessage.AddressNotSupported,
-                ErrorCode = (int)ErrorCode.AddressNotSupported
-            };*/
+                Data = _repository.GetAll()
+                .OrderBy(item => item.Id).Last().Id
+            };
+            /* }
+
+             return new BaseResult<int>()
+             {
+                 ErrorMassage = ErrorMessage.AddressNotSupported,
+                 ErrorCode = (int)ErrorCode.AddressNotSupported
+             };*/
 
         }
         catch (Exception e)
@@ -244,19 +243,19 @@ public class AddressService : IAddressService
 
             /*if (await AddressContainsInBase(dto))
             {*/
-                await _repository.UpdateAsync(_mapper.Map<Address>(dto));
-
-                return new BaseResult<AddressDto>()
-                {
-                    Data = dto
-                };
-           /* }
+            await _repository.UpdateAsync(_mapper.Map<Address>(dto));
 
             return new BaseResult<AddressDto>()
             {
-                ErrorMassage = ErrorMessage.AddressNotSupported,
-                ErrorCode = (int)ErrorCode.AddressNotSupported
-            };*/
+                Data = dto
+            };
+            /* }
+
+             return new BaseResult<AddressDto>()
+             {
+                 ErrorMassage = ErrorMessage.AddressNotSupported,
+                 ErrorCode = (int)ErrorCode.AddressNotSupported
+             };*/
         }
         catch (Exception e)
         {
@@ -385,7 +384,6 @@ public class AddressService : IAddressService
             return false;
         }
     }
-
 
     /// <summary>
     /// Проверка наличия адреса в базе адресов.

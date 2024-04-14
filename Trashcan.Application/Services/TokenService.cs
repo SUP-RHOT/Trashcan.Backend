@@ -1,15 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Azure.Core;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Tokens;
-using Serilog;
 using Trashcan.Application.Resources;
-using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.AuthToken;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
@@ -20,6 +17,7 @@ using Trashcan.Domain.Settings;
 
 namespace Trashcan.Application.Services;
 
+/// <inheritdoc />
 public class TokenService : ITokenService
 {
     private readonly IBaseRepository<Actor> _actorRepository;
@@ -37,30 +35,34 @@ public class TokenService : ITokenService
         _audiece = options.Value.Audience;
     }
 
+    /// <inheritdoc />
     public string GenerateAccessToken(IEnumerable<Claim> claims)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey));
         var creadentialns = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var securityToken = new JwtSecurityToken(
-            _issuer, 
-            _audiece, 
-            claims, 
-            null, 
-            DateTime.UtcNow.AddMinutes(10), 
+            _issuer,
+            _audiece,
+            claims,
+            null,
+            DateTime.UtcNow.AddMinutes(10),
             creadentialns
             );
-        //var token =
+
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
 
+    /// <inheritdoc />
     public string GenerateRefreshToken()
     {
         var randomNumbers = new byte[32];
         using var randomNumberGenerator = RandomNumberGenerator.Create();
         randomNumberGenerator.GetBytes(randomNumbers);
+
         return Convert.ToBase64String(randomNumbers);
     }
 
+    /// <inheritdoc />
     public ClaimsPrincipal GetPrincipalFromExpiredToken(string accessToken)
     {
         var tokenValidationParameters = new TokenValidationParameters()
@@ -83,12 +85,13 @@ public class TokenService : ITokenService
         return claimsPrincipal;
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<TokenDto>> RefreshToken(TokenDto dto)
     {
 
         var claimsPrincipal = GetPrincipalFromExpiredToken(dto.AccessToken);
         var actorName = claimsPrincipal.Identity?.Name;
-        
+
         try
         {
             var actor = await _actorRepository
