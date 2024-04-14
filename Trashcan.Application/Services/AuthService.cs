@@ -1,13 +1,12 @@
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using Trashcan.Application.Resources;
 using Trashcan.Domain.Dto.ActorDTO;
 using Trashcan.Domain.Dto.AuthToken;
-using Trashcan.Domain.Entities.BaseEntity;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
 using Trashcan.Domain.Interfaces.BaseRepository;
@@ -16,14 +15,13 @@ using Trashcan.Domain.Result;
 
 namespace Trashcan.Application.Services;
 
+/// <inheritdoc />
 public class AuthService : IAuthService
 {
     private readonly IBaseRepository<Actor> _actorRepository;
     private readonly IBaseRepository<ActorToken> _actorTokenRepository;
     private readonly ITokenService _tokenService;
     private readonly IMailService _mailService;
-
-    
     private readonly ILogger _logger;
     private readonly IMapper _mapping;
 
@@ -44,6 +42,7 @@ public class AuthService : IAuthService
         _mailService = mailService;
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<RegisterActorDto>> Register(RegisterActorDto dto)
     {
         try
@@ -72,7 +71,7 @@ public class AuthService : IAuthService
             {
                 Data = dto
             };
-            
+
         }
         catch (Exception e)
         {
@@ -85,6 +84,7 @@ public class AuthService : IAuthService
         }
     }
 
+    /// <inheritdoc />
     public async Task<BaseResult<TokenDto>> Login(LoginActorDto dto)
     {
         try
@@ -100,7 +100,7 @@ public class AuthService : IAuthService
                     ErrorCode = (int)ErrorCode.DataNotFount
                 };
             }
-            
+
             if (!IsVerifyPassword(actor.Password, dto.Password))
             {
                 return new BaseResult<TokenDto>()
@@ -118,11 +118,11 @@ public class AuthService : IAuthService
                 new Claim(ClaimTypes.Name, actor.Login),
                 new Claim(ClaimTypes.Role, "User")
             };
-            
+
             var accessTocen = _tokenService.GenerateAccessToken(claimes);
             var refreshToken = _tokenService.GenerateRefreshToken();
-            
-            
+
+
             if (actorToken == null)
             {
                 actorToken = new ActorToken()
@@ -157,7 +157,12 @@ public class AuthService : IAuthService
             };
         }
     }
-    
+
+    /// <summary>
+    /// Хеширование пароля.
+    /// </summary>
+    /// <param name="password"> Пароль. </param>
+    /// <returns> Хешированный пароль. </returns>
     private string HashPassword(string password)
     {
         var salt = "Sup-rHot";
@@ -165,6 +170,12 @@ public class AuthService : IAuthService
         return BitConverter.ToString(bytes).ToLower();
     }
 
+    /// <summary>
+    /// Проверка пароля.
+    /// </summary>
+    /// <param name="ActorPasswordHash"> Пароль пользователя. </param>
+    /// <param name="actorPasswors"> Введенный пароль. </param>
+    /// <returns> True, если совпали, иначе False. </returns>
     private bool IsVerifyPassword(string ActorPasswordHash, string actorPasswors)
     {
         var hash = HashPassword(actorPasswors);

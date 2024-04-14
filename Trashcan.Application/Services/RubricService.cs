@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Trashcan.Application.Resources;
-using Trashcan.DAL.Repositories;
 using Trashcan.Domain.Dto.RubricDto;
 using Trashcan.Domain.Entity;
 using Trashcan.Domain.Enum;
