@@ -15,7 +15,12 @@ export const login = async (login, password) => {
 }
 
 export const getActor = async (id) => {
-    const responce = await $authHost.get('api/v1/Actor/id?id=' + id)
+    const responce = await $authHost.get('api/v1/Actor/getActor?id=' + id)
+    return responce
+}
+
+export const deleteEvent = async (id) => {
+    const responce = await $authHost.delete('api/Event/deleteEvent?Id=' + id)
     return responce
 }
 

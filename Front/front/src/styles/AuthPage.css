@@ -1,44 +1,70 @@
-.container {
-    min-width: 600px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+.background {
+  margin: 0;
+  padding: 0;
+  background-image: url('../../public/images/qq.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
-h1 {
-    text-align: center;
+.AuthPage {
+  background-color: rgba(255, 255, 255, 0.582);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
+.AuthPage img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.AuthPage form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
+.AuthPage input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-button:hover {
-    background-color: #0056b3;
+.AuthPage button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #69842b;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-label {
-    display: flex;
-    align-items: center;
+.AuthPage button:hover {
+  background-color: #576e24;
 }
 
-a {
-    text-align: center;
+.AuthPage label {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+
+.AuthPage a {
+  color: #000;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.AuthPage a:hover {
+  text-decoration: underline;
 }

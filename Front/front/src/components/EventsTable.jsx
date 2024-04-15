@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/EventsTable.css';
-import {getAllEvents} from "../http/userAPI";
+import {deleteEvent, getAllEvents} from "../http/userAPI";
 
 const EventTable = () => {
     const [data, setData] = useState([]);
@@ -11,15 +11,19 @@ const EventTable = () => {
             const response = await getAllEvents();
             setData(response.data.data);
         };
+try {
+    fetchData();
+}catch (e){
+    console.log(e)
+}
 
-        fetchData();
     }, []);
 
 
     const handleDelete = async (id) => {
-        // Replace this with your actual API call to delete a record
-        //await axios.delete(`https://your-api-url.com/data/${id}`);
-       // setData(data.filter((item) => item.id !== id));
+        const responce = await deleteEvent(id)
+        console.log(responce)
+        setData(data.filter((item) => item.id !== id));
     };
 
     return (

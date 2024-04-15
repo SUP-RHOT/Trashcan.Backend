@@ -9,9 +9,8 @@ import {
 const HomePage = () => {
     return (
         <div>
-            <Navbar/>
             <div className="home-container">
-                <div style={{marginTop:'700px'}} id="detail">
+                <div className={window.location.href == 'http://localhost:3000/adminPanel' ? "marTop" : ""} id="detail">
                     <Outlet />
                 </div>
                 

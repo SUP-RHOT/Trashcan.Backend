@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-image: url('/public/images/qq.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+.logo {
+    width: 607px;
+    height: 607px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+    
+}
+
+.button {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none; /* Убираем нижнее подчёркивание */
+  }
+  
+  .button:hover {
+    background-color: #919044;
+  }
+
+.rubrics-container {
+    background-color: #ccc;
+    padding: 20px;
+    width: 1300px;
+    height: 604.02px;
+    margin: 0 auto;
+    overflow: auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.rubric-wrapper {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 20px;
+    width: 388px;
+    height: 554px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rubric {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.rubric h3 {
+    font-size: 20px;
+    color: #000000;
+    margin: 5px 0 0;
+}
+
+.rubric img {
+    width: 306px;
+    height: 296px;
+}
+
+.rubric .button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer-button {
+    margin: 0 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-button img {
+    width: 40px;
+    height: 40px;
+}
+
+.rights {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}

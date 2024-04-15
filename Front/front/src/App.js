@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import AddressForm from "./pages/AddressForm";
 import AdminPanel from "./pages/AdminPanel";
 import EditProfile from "./pages/EditProfile";
+import Mapa from "./pages/Mapa";
 
 
 const router = createBrowserRouter([
@@ -45,8 +46,15 @@ const router = createBrowserRouter([
           {
               path: "/adminPanel",
               element: <AdminPanel/>,
+          },
+          {
+              path: "/adminPanel",
+              element: <AdminPanel/>,
+          },
+          {
+              path: "/home",
+              element: <Mapa/>,
           }
-
       ]
   },
 ]);

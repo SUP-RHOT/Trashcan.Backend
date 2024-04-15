@@ -26,11 +26,13 @@ const Navbar = () => {
         console.log(responce)
     }
 
+    const currentURL = () => {console.log(window.location.href)};
+
     return (
         <div className="navbar">
-            <button><NavLink to="/map">Домой</NavLink></button>
-            <button>О нас</button>
-            <button><NavLink to="/addressForm">Добавить по адрессу</NavLink></button>
+            <button><NavLink to="/home">Домой</NavLink></button>
+            <button onClick={currentURL}>О нас</button>
+            {isAuth ? <button><NavLink to="/addressForm">Добавить по адрессу</NavLink></button> : ''}
             {isAuth ? <button><NavLink to="/profile" >Профиль</NavLink></button> : ''}
             {isAuth ? <button><NavLink to="/adminPanel" >Панель Админа</NavLink></button> : ''}
             {!isAuth ? <button><NavLink to="/auth" >Войти</NavLink></button> : <button onClick={logout}><NavLink to="/map" >Выйти</NavLink></button>}

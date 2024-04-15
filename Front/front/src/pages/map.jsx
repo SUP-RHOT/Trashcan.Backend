@@ -6,6 +6,7 @@ import ModalComponent from "../components/Modal";
 import {CurMarkerLock} from "../context";
 import {getAllEvents} from "../http/userAPI";
 import * as events from "events";
+import {useNavigate} from "react-router-dom";
 
 // указываем путь к файлам marker
 L.Icon.Default.imagePath = "https://unpkg.com/leaflet@1.5.0/dist/images/";
@@ -14,35 +15,20 @@ const MapComponent = () => {
 
 
 
-
+    const navigate = useNavigate()
     const [maks, setMaks] = useState([])
-    const [markers, setMarkers] = useState({
-        data:[
-            {
-                location:[53.225791, 50.193672],
-                name: "Макс",
-                adress: "",
-                description: "Затопило учебники, нужно нырять(("
-            },
-            {
-                location:[53.196748, 50.111749],
-                name: "Славик",
-                adress: "",
-                description: "уронил ключи в общественный туалет, вызывайте спасателей!!!"
-            },
-            {
-                location:[53.234836697261585, 50.23140192031861],
-                name: "Тима",
-                adress: "",
-                description: "отдыхаю))))"
-            }
-        ]})
+
     useEffect(() => {
         const getEvents = async() =>{
             const events = await getAllEvents()
             setMaks(events.data.data)
         }
-        getEvents()
+        try {
+            getEvents()
+        } catch (e){
+            console.log(e)
+        }
+
     }, []);
     const {curMarker, setCurMarker} = useContext(CurMarkerLock)
 
@@ -76,6 +62,10 @@ const MapComponent = () => {
         setIsModalOpen(false);
     };
 
+    const handleCancel = () => {
+        navigate('/home')
+    };
+
         return (
             <div>
                 <>
@@ -85,15 +75,6 @@ const MapComponent = () => {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         <MyComponent/>
-                        {markers.data.map((marker) => (
-                            <Marker position={marker.location}>
-                                <Popup><div className="popup-content">
-                                    <h3 className="popup-name">{marker.name}</h3>
-                                    <p className="popup-address">Адресс: {marker.adress}</p>
-                                    <p className="popup-description">Описание: {marker.description}</p>
-                                </div></Popup>
-                            </Marker>
-                        ))}
 
                         {maks.map((marker) => (
                             <Marker position={[marker.address?.width ?? 0, marker.address?.longitude ?? 0]}>
@@ -110,6 +91,7 @@ const MapComponent = () => {
                             </Marker>}
 
                     </MapContainer>
+                    <button className="cancel-button" onClick={handleCancel}>Назад</button>
                     <ModalComponent isOpen={isModalOpen} onClose={handleModalClose} />
                 </>
             </div>

@@ -22,24 +22,43 @@ const AuthPage = () => {
 
     const signIn = async() =>{
         const responce = await login(log, password)
-        setIsAuth(true)
-        const actor = await getActor(responce.data.data.id)
-        localStorage.setItem('actor', JSON.stringify(actor.data.data))
-        navigate('/map')
-        console.log(responce)
-        console.log(actor)
+        if (responce) {
+            setIsAuth(true)
+            const actor = await getActor(responce.data.data.id)
+            localStorage.setItem('actor', JSON.stringify(actor.data.data))
+            navigate('/map')
+            console.log(responce)
+            console.log(actor)
+        }
     }
 
     return (
-        <div className="container">
-             <h1>Authorization</h1>
-            <form onSubmit={event => event.preventDefault()}>
-                <input type="text" placeholder="Username/Email" required onChange={e => setLog(e.target.value)} />
-                <input type="password" placeholder="Password" required onChange={e => setPassword(e.target.value)} />
-                <button type="submit" onClick={signIn}>Login</button>
-                <label><input type="checkbox" /> Remember Me</label>
-                <a href="#">Forgot Password?</a>
-            </form>
+        <div className="background">
+            <div className="AuthPage">
+                <img src="/images/Eccooooo.png" alt="Logo" />
+                <h1>АВТОРИЗАЦИЯ</h1>
+                <form onSubmit={(event) => event.preventDefault()}>
+                    <input
+                        type="text"
+                        placeholder="Имя пользователя"
+                        required
+                        onChange={(e) => setLog(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Пароль"
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit" onClick={signIn}>
+                        Войти
+                    </button>
+                    <label>
+                        <input type="checkbox" />Запомнить меня
+                    </label>
+                    <a href="#">Забыли пароль?</a>
+                </form>
+            </div>
         </div>
     );
 };

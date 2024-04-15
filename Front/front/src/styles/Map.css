@@ -1,4 +1,4 @@
-@import url("~leaflet/dist/leaflet.css");
+@import url("/src/styles/leaflet.css");
 
 body,
 #root,
@@ -24,4 +24,37 @@ body,
 
 .popup-description {
     font-size: 14px;
+}
+
+.map-container {
+    position: relative;
+}
+
+.map {
+    width: 100vw;
+    height: calc(100vh - 40px); /* Учтите размер кнопки "Отмена" */
+}
+
+.cancel-button {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    z-index: 999;
+    padding: 10px 20px;
+    background-color: red; /* Красный цвет кнопки */
+    color: white; /* Белый цвет текста */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: darkred; /* Темно-красный цвет при наведении */
+}
+.leaflet-container .leaflet-control .leaflet-attribution .leaflet-attribution-flag {
+    background-color: red !important;
+    color: white !important;
 }

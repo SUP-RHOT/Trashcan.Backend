@@ -106,6 +106,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
         const responce = await SetByCords(event)
         //setMarkers({data: [...markers.data, {location:curMarkerLock, name:JSON.parse(localStorage.getItem('actor')).name, address:address, description:description}]}))
         onClose();
+        alert('очка была успешно создана!')
     };
 
     return (
