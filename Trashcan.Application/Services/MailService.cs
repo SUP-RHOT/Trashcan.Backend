@@ -28,6 +28,9 @@ namespace Trashcan.Application.Services
         {
             try
             {
+                if (string.IsNullOrEmpty(email))
+                    return new BaseResult<bool> { Data = false };
+
                 using var emailMessage = new MimeMessage();
 
                 emailMessage.From.Add(new MailboxAddress(_settings.DisplayName, _settings.From));
