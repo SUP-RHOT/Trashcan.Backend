@@ -65,7 +65,7 @@ public class AuthService : IAuthService
             actor.Password = HashPassword(dto.Password);
 
             await _actorRepository.CreateAsync(actor);
-            await _mailService.SendAsync(dto.Email, "SUPЕRHOT", "Вы успешно зарегистрировались.");
+            //await _mailService.SendAsync(dto.Email, "SUPпїЅRHOT", "пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 
             return new BaseResult<RegisterActorDto>()
             {
@@ -116,7 +116,7 @@ public class AuthService : IAuthService
             var claimes = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, actor.Login),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Role, "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ")
             };
 
             var accessTocen = _tokenService.GenerateAccessToken(claimes);
@@ -139,7 +139,7 @@ public class AuthService : IAuthService
                 actorToken.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             }
 
-            await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Выполнен вход в ваш аккаунт.");
+            //await _mailService.SendAsync(actor.Email, "SUPпїЅRHOT", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 
             return new BaseResult<TokenDto>()
             {
@@ -159,10 +159,10 @@ public class AuthService : IAuthService
     }
 
     /// <summary>
-    /// Хеширование пароля.
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
     /// </summary>
-    /// <param name="password"> Пароль. </param>
-    /// <returns> Хешированный пароль. </returns>
+    /// <param name="password"> пїЅпїЅпїЅпїЅпїЅпїЅ. </param>
+    /// <returns> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. </returns>
     private string HashPassword(string password)
     {
         var salt = "Sup-rHot";
@@ -171,11 +171,11 @@ public class AuthService : IAuthService
     }
 
     /// <summary>
-    /// Проверка пароля.
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
     /// </summary>
-    /// <param name="ActorPasswordHash"> Пароль пользователя. </param>
-    /// <param name="actorPasswors"> Введенный пароль. </param>
-    /// <returns> True, если совпали, иначе False. </returns>
+    /// <param name="ActorPasswordHash"> пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. </param>
+    /// <param name="actorPasswors"> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. </param>
+    /// <returns> True, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ False. </returns>
     private bool IsVerifyPassword(string ActorPasswordHash, string actorPasswors)
     {
         var hash = HashPassword(actorPasswors);

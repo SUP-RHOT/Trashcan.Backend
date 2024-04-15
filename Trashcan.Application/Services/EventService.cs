@@ -102,7 +102,7 @@ namespace Trashcan.Application.Services
                 var actor = _actorRepository.GetAll()
                     .FirstOrDefaultAsync(x => x.Id == dto.ActorId).Result;
 
-                await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно создано.");
+                //await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно создано.");
 
                 return new BaseResult<EventDto>()
                 {
@@ -144,7 +144,7 @@ namespace Trashcan.Application.Services
                 var actor = _actorRepository.GetAll()
                    .FirstOrDefaultAsync(x => x.Id == eventToDelete.ActorId).Result;
 
-                await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно удалено.");
+                //await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Событие успешно удалено.");
 
                 return new BaseResult<EventDto>()
                 {

@@ -17,7 +17,7 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
             new Role()
             {
                 Id = 1,
-                Name = "Модератор"
+                Name = "Пользователь"
             },
             new Role()
             {

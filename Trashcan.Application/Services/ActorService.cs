@@ -155,7 +155,7 @@ public class ActorService : IActorService
             }
 
             await _repository.RemoveAsync(actor);
-            await _mailService.SendAsync(actor.Email, "SUPЕRHOT", "Ваш аккаунт удален.");
+            //await _mailService.SendAsync(actor.Email, "SUPпїЅRHOT", "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
 
             return new BaseResult<ActorDto>()
             {
@@ -193,7 +193,7 @@ public class ActorService : IActorService
 
             await _repository.UpdateAsync(_mapper.Map<Actor>(dto));
 
-            await _mailService.SendAsync(dto.Email, "SUPЕRHOT", "Ваши данные обновлены.");
+            //await _mailService.SendAsync(dto.Email, "SUPпїЅRHOT", "пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
 
             return new BaseResult<ActorDto>()
             {
